@@ -1,0 +1,19 @@
+.training-list {
+  width: 100%;
+  background: transparent;
+  padding: 4px 0 88px;
+  color: var(--app-color-text)
+}
+
+.training-item {
+  display: flex;
+  width: 100%;
+  --background: transparent;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 16px;
+}
+
+.app-training-card {
+  width: 100%;
+}

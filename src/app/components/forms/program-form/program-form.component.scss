@@ -1,0 +1,52 @@
+.program-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 8px 0;
+}
+
+.program-form__eyebrow {
+  margin: 0 0 8px;
+  color: #ffd2a3;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.program-form__title {
+  color: #f6f7f9;
+}
+
+.program-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.program-form__field {
+  padding: 14px 16px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(20, 20, 20, 0.96), rgba(12, 12, 12, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.program-form__label {
+  color: #bdb4aa;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.program-form ion-item {
+  --background: #111111;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 128, 0, 0.16);
+}
+
+@media (max-width: 720px) {
+  .program-form__grid {
+    grid-template-columns: 1fr;
+  }
+}

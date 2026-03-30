@@ -1,0 +1,57 @@
+.sport-selects {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.sport-selects__field {
+  padding: 14px 16px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(20, 20, 20, 0.96), rgba(12, 12, 12, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sport-selects__label {
+  display: block;
+  margin-bottom: 10px;
+  color: #bdb4aa;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+}
+
+.input {
+  width: 100%;
+  min-height: 46px;
+  padding: 2px 12px!important;
+  border-radius: 18px;
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #f6f7f9;
+  text-align: left;
+}
+
+.select-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select-input::part(text),
+.select-input::part(placeholder) {
+  width: 100%;
+  text-align: left;
+  color: #f6f7f9;
+}
+
+.icon-color {
+  color: #ff8000;
+}
+
+ion-item {
+  --background: transparent;
+  --color: #f6f7f9;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --min-height: auto;
+}

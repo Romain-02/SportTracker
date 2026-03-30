@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="text-xl">{{ isEditMode ? 'Modifier un programme' : 'Ajouter un programme' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Annuler</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" color="bg-tertiary">
+  <form [formGroup]="programForm" class="modal-form">
+    <app-program-form [programForm]="programForm" />
+  </form>
+
+  <ion-toolbar class="modal-actions">
+    <ion-buttons slot="end">
+      <span class="material-icons">done_outline</span>
+      <ion-button color="primary" (click)="confirm()" [strong]="true">Enregistrer</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-content>
+

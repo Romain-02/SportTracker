@@ -1,0 +1,32 @@
+<ion-content class="programs-page">
+  <section class="programs-shell">
+    <div class="programs-header">
+      <div>
+        <p class="programs-eyebrow">Programmes</p>
+        <h1 class="programs-title">Construire une progression</h1>
+      </div>
+    </div>
+
+    <app-program-filters-toolbar [showArchived]="showArchived"
+                                 (showArchivedChange)="showArchived = $event"
+                                 (firstDateChange)="setFirstDate($event)"
+                                 (secondDateChange)="setSecondDate($event)"
+                                 (resetRequested)="resetFilters()" />
+
+    <section class="program-list">
+      @for(program of filteredPrograms(); track program.id){
+        <app-program-card [program]="program"
+                          [linkedTrainings]="trainingsForProgram(program)"
+                          (editProgram)="editProgram($event)" />
+      } @empty {
+        <div class="empty-card">Aucun programme disponible.</div>
+      }
+    </section>
+  </section>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary" (click)="createProgram()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

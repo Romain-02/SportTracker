@@ -1,0 +1,30 @@
+<section class="toolbar-card">
+  <div class="toolbar-header">
+    <button class="toolbar-toggle" (click)="toggleFiltersExpanded()">
+      <ion-icon name="funnel-outline"></ion-icon>
+      <span>Filtres</span>
+      <ion-icon [name]="filtersExpanded ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+    </button>
+  </div>
+
+  @if(filtersExpanded){
+    <div class="toolbar-body">
+      <app-date-filters #dateFilters
+                        (firstDateChange)="firstDateChange.emit($event)"
+                        (secondDateChange)="secondDateChange.emit($event)" />
+
+      <ion-item lines="none" class="toggle-item">
+        <ion-toggle [ngModel]="showArchived"
+                    (ngModelChange)="showArchivedChange.emit($event)"
+                    justify="space-between">
+          Inclure les archives
+        </ion-toggle>
+      </ion-item>
+
+      <button class="reset-button" (click)="resetFilters()">
+        <ion-icon name="refresh-outline"></ion-icon>
+        <span>Reinitialiser</span>
+      </button>
+    </div>
+  }
+</section>

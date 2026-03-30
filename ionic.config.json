@@ -1,0 +1,7 @@
+{
+  "name": "projet-sql-depenses-v19",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

@@ -1,0 +1,12 @@
+<ion-list class="training-list">
+  @for(training of trainings; track training.id){
+    <ion-item color="secondary" lines="none" class="training-item">
+      <app-training-card [training]="training"
+                         [summary]="trainingSummary(training)"
+                         (editTraining)="editTraining.emit($event)"
+                        class="app-training-card" />
+    </ion-item>
+  }@empty {
+    <div class="empty-state">Aucun entrainement enregistré pour l'instant.</div>
+  }
+</ion-list>

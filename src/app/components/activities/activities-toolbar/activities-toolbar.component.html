@@ -1,0 +1,106 @@
+<section class="toolbar-card">
+  <div class="toolbar-header">
+      <button class="toolbar-toggle" (click)="toggleFiltersExpanded()">
+        <ion-icon name="funnel-outline"></ion-icon>
+        <span>Filtres</span>
+        <ion-icon [name]="filtersExpanded ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+      </button>
+
+    @if(activityTab === 'sessions'){
+      <div class="view-switch">
+        <button class="view-switch__option"
+                (click)="setSessionViewMode(sessionViewMode === 'list' ? 'week' : 'list')">
+          @if(sessionViewMode === 'list'){
+            <ion-icon class="view-switch__option-icon" name="list-outline"/>
+          } @else {
+            <ion-icon class="view-switch__option-icon" name="calendar-outline"></ion-icon>
+          }
+        </button>
+      </div>
+    }
+
+  </div>
+
+  @if(filtersExpanded){
+    <div class="toolbar-body">
+      <div class="toolbar-body__row">
+        <div class="compact-filter compact-filter--half">
+          <span class="compact-filter__label">Sport</span>
+          <ion-item lines="none" class="select-item">
+            <ion-select [ngModel]="selectedSport"
+                        (ngModelChange)="updateSport($event)"
+                        aria-label="Sport"
+                        interface="modal"
+                        placeholder="Tous"
+                        class="custom-select">
+              <ion-select-option [value]="null">Tous</ion-select-option>
+              @for(sport of sports; track sport.id){
+                <ion-select-option [value]="sport">{{ sport.name }}</ion-select-option>
+              }
+            </ion-select>
+          </ion-item>
+        </div>
+
+        <div class="compact-filter compact-filter--half">
+          <span class="compact-filter__label">Type</span>
+          <ion-item lines="none" class="select-item">
+            <ion-select [ngModel]="selectedSportTypeId"
+                        (ngModelChange)="selectedSportTypeIdChange.emit($event)"
+                        aria-label="Type"
+                        interface="modal"
+                        placeholder="Tous"
+                        class="custom-select">
+              <ion-select-option [value]="null">Tous</ion-select-option>
+              @for(sportType of filteredSportTypes; track sportType.id){
+                <ion-select-option [value]="sportType.id">{{ sportType.name }}</ion-select-option>
+              }
+            </ion-select>
+          </ion-item>
+        </div>
+      </div>
+
+      @if(activityTab === 'sessions'){
+        <div class="compact-filter">
+          <span class="compact-filter__label">Entrainement</span>
+          <ion-item lines="none" class="select-item">
+            <ion-select [ngModel]="selectedTrainingId"
+                        (ngModelChange)="selectedTrainingIdChange.emit($event)"
+                        aria-label="Entrainement"
+                        interface="modal"
+                        placeholder="Tous"
+                        class="custom-select">
+              <ion-select-option [value]="null">Tous</ion-select-option>
+              @for(training of filteredTrainings; track training.id){
+                <ion-select-option [value]="training.id">{{ training.name || training.sportType?.name || training.sport.name }}</ion-select-option>
+              }
+            </ion-select>
+          </ion-item>
+        </div>
+
+        <div class="compact-filter">
+          <span class="compact-filter__label">Etat</span>
+          <ion-item lines="none" class="select-item">
+            <ion-select [ngModel]="selectedSessionStatus"
+                        (ngModelChange)="selectedSessionStatusChange.emit($event)"
+                        aria-label="Etat"
+                        interface="modal"
+                        class="custom-select">
+              @for(option of sessionStatusOptions; track option.value){
+                <ion-select-option [value]="option.value">{{ option.label }}</ion-select-option>
+              }
+            </ion-select>
+          </ion-item>
+        </div>
+
+        <app-date-filters #dateFilters
+                          (firstDateChange)="firstDateChange.emit($event)"
+                          (secondDateChange)="secondDateChange.emit($event)" />
+      }
+
+      <button class="reset-button" (click)="resetFilters()">
+        <ion-icon name="refresh-outline"></ion-icon>
+        <span>Reinitialiser</span>
+      </button>
+    </div>
+  }
+</section>

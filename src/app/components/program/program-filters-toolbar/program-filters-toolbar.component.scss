@@ -1,0 +1,42 @@
+.toolbar-card {
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+  margin-bottom: 14px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(17, 17, 17, 0.98), rgba(8, 8, 8, 0.98));
+  border: 1px solid rgba(255, 128, 0, 0.14);
+}
+
+.toolbar-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.toolbar-toggle,
+.reset-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 128, 0, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #f6f7f9;
+  font-weight: 700;
+}
+
+.toolbar-body {
+  display: grid;
+  gap: 12px;
+}
+
+.toggle-item {
+  --background: #111111;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 128, 0, 0.18);
+}

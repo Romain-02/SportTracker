@@ -1,0 +1,45 @@
+.app-header {
+  background: #050505;
+  box-shadow: 0 1px 5px #050505;
+}
+
+.header-shell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 6vh;
+  min-height: 56px;
+  padding: 0 14px;
+}
+
+.logo-div {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 80%;
+  width: auto;
+  object-fit: contain;
+}
+
+.profile-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 128, 0, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #f6f7f9;
+}
+
+.profile-button ion-icon {
+  font-size: 28px;
+}
+
+.profile-menu {
+  min-width: 240px;
+}

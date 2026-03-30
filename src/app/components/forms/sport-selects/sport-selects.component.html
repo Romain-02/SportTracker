@@ -1,0 +1,25 @@
+<div class="sport-selects">
+  <div class="sport-selects__field">
+    <small class="sport-selects__label">Sport</small>
+    <ion-item lines="none" [formGroup]="staminaTrainingForm">
+      <span class="material-icons icon-color mr-1">directions_bike</span>
+      <ion-select class="input select-input mx-1" formControlName="sport" placeholder="Sport">
+        @for(sport of sports(); track sport.id){
+          <ion-select-option [value]="sport.id">{{sport.name}}</ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+  </div>
+
+  <div class="sport-selects__field">
+    <small class="sport-selects__label">Genre</small>
+    <ion-item lines="none" [formGroup]="staminaTrainingForm">
+      <span class="material-icons icon-color mr-1">sports_baseball</span>
+      <ion-select class="input select-input mx-1" formControlName="sportType" placeholder="Genre">
+        @for(sportType of filteredSportTypes(); track sportType.id){
+          <ion-select-option [value]="sportType.id">{{sportType.name}}</ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+  </div>
+</div>

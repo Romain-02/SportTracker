@@ -1,0 +1,141 @@
+<ion-content class="dashboard-page">
+  <section class="dashboard-shell">
+    <div class="dashboard-header">
+      <div>
+        <p class="dashboard-eyebrow">Statistiques</p>
+        <h1>Analyser la progression</h1>
+      </div>
+
+      <ion-button fill="outline" color="primary" (click)="resetFilters()">Reinitialiser</ion-button>
+    </div>
+
+    <ion-segment [(ngModel)]="statsTab" class="dashboard-segment">
+      <ion-segment-button value="summary">Synthese</ion-segment-button>
+      <ion-segment-button value="records">Records chrono</ion-segment-button>
+      <ion-segment-button value="distances">Records distance</ion-segment-button>
+    </ion-segment>
+
+    <section class="dashboard-filters">
+      <ion-item lines="none">
+        <ion-select [(ngModel)]="rangePreset" label="Periode" labelPlacement="stacked">
+          <ion-select-option value="all">Toute la periode</ion-select-option>
+          <ion-select-option value="week">Derniere semaine</ion-select-option>
+          <ion-select-option value="month">Dernier mois</ion-select-option>
+          <ion-select-option value="quarter">Dernier trimestre</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="startDate" type="date" label="Debut" labelPlacement="stacked"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="endDate" type="date" label="Fin" labelPlacement="stacked"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-select [(ngModel)]="selectedSportId" label="Sport" labelPlacement="stacked">
+          <ion-select-option [value]="null">Tous</ion-select-option>
+          @for(sport of sports(); track sport.id){
+            <ion-select-option [value]="sport.id">{{ sport.name }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-select [(ngModel)]="selectedSportTypeId" label="Type" labelPlacement="stacked">
+          <ion-select-option [value]="null">Tous</ion-select-option>
+          @for(sportType of sportTypes(); track sportType.id){
+            <ion-select-option [value]="sportType.id">{{ sportType.name }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-select [(ngModel)]="selectedProgramId" label="Programme" labelPlacement="stacked">
+          <ion-select-option [value]="null">Tous</ion-select-option>
+          @for(program of programs(); track program.id){
+            <ion-select-option [value]="program.id">{{ program.name }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+    </section>
+
+    @if(statsTab === 'summary'){
+      <section class="summary-grid">
+        <article class="summary-card">
+          <small>Max kilometres</small>
+          <strong>{{ totals.maxKilometers | number:'1.0-1' }} km</strong>
+        </article>
+        <article class="summary-card">
+          <small>Max temps utile</small>
+          <strong>{{ totals.maxMinutes | number:'1.0-0' }} min</strong>
+        </article>
+        <article class="summary-card">
+          <small>Total kilometres</small>
+          <strong>{{ totals.totalKilometers | number:'1.0-1' }} km</strong>
+        </article>
+        <article class="summary-card">
+          <small>Total heures utiles</small>
+          <strong>{{ (totals.totalMinutes / 60) | number:'1.0-1' }} h</strong>
+        </article>
+        <article class="summary-card">
+          <small>Difficulté moyenne</small>
+          <strong>{{ totals.difficultyAverage | number:'1.0-1' }}/10</strong>
+        </article>
+      </section>
+
+      <section class="chart-card">
+        <h2>Dernieres seances</h2>
+        @for(entry of chartData; track entry.label){
+          <div class="chart-row">
+            <div class="chart-row__label">{{ entry.label | date:'dd/MM' }}</div>
+            <div class="chart-bars">
+              <div class="chart-bar chart-bar--distance" [style.width.%]="entry.distancePct"></div>
+              <div class="chart-bar chart-bar--time" [style.width.%]="entry.timePct"></div>
+              <div class="chart-bar chart-bar--difficulty" [style.width.%]="entry.difficultyPct"></div>
+            </div>
+          </div>
+        }
+      </section>
+    }
+
+    @if(statsTab === 'records'){
+      <section class="records-list">
+        @for(record of chronologicalRecords; track record.id){
+          <article class="record-card">
+            <h2>{{ record.staminaTraining?.name || record.staminaTraining?.sportType?.name || record.staminaTraining?.sport?.name }}</h2>
+            <p>{{ record.date | date:'longDate' }}</p>
+            <div>{{ record.realKilometers }} km | {{ getEffectiveTime(record) }} min utiles | {{ averageSpeed(record) | number:'1.0-2' }} km/h</div>
+          </article>
+        } @empty {
+          <div class="empty-card">Aucun record trouve avec les filtres actuels.</div>
+        }
+      </section>
+    }
+
+    @if(statsTab === 'distances'){
+      <section class="distance-section">
+        <article class="distance-card">
+          <h2>Course</h2>
+          @for(entry of distanceRecordsForSport(1, [3, 5, 10, 21, 42]); track entry.threshold){
+            <div class="distance-row">
+              <span>{{ entry.threshold }} km</span>
+              <strong>@if(entry.best){ {{ getEffectiveTime(entry.best) }} min } @else { -- }</strong>
+            </div>
+          }
+        </article>
+
+        <article class="distance-card">
+          <h2>Velo</h2>
+          @for(entry of distanceRecordsForSport(2, [15, 20, 30, 40, 60, 80]); track entry.threshold){
+            <div class="distance-row">
+              <span>{{ entry.threshold }} km</span>
+              <strong>@if(entry.best){ {{ getEffectiveTime(entry.best) }} min } @else { -- }</strong>
+            </div>
+          }
+        </article>
+      </section>
+    }
+  </section>
+</ion-content>

@@ -1,0 +1,11 @@
+<div class="date-filters">
+  <label class="date-filters__field">
+    <span>Du</span>
+    <input type="date" [value]="firstDate" (input)="onFirstDateChange($event)">
+  </label>
+
+  <label class="date-filters__field">
+    <span>Au</span>
+    <input type="date" [value]="secondDate" (input)="onSecondDateChange($event)">
+  </label>
+</div>

@@ -1,0 +1,53 @@
+.sessions-list {
+  display: grid;
+  gap: 18px;
+  width: 100%;
+  padding: 4px 0 88px;
+}
+
+.sessions-list__group {
+  display: grid;
+  gap: 14px;
+}
+
+.sessions-list__divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffd2a3;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.sessions-list__divider::before,
+.sessions-list__divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, rgba(255, 128, 0, 0), rgba(255, 128, 0, 0.38), rgba(255, 128, 0, 0));
+}
+
+.session-item {
+  width: 100%;
+}
+
+.app-session-card {
+  display: block;
+  width: 100%;
+}
+
+.sessions-list__sentinel {
+  width: 100%;
+  height: 1px;
+}
+
+.sessions-list__empty {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #bdb4aa;
+  text-align: center;
+}

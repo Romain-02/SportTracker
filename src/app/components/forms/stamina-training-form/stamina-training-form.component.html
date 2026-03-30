@@ -1,0 +1,117 @@
+<section class="training-form">
+  <div class="training-form__header">
+    <div>
+      <p class="training-form__eyebrow">Nouvel entraînement</p>
+      <ion-card-subtitle class="training-form__title">Information sur l'entraînement</ion-card-subtitle>
+    </div>
+  </div>
+
+  <div class="training-form__grid">
+    <div class="training-form__field">
+      <small class="training-form__label">Nom</small>
+      <ion-item lines="none" [formGroup]="staminaTrainingForm">
+        <span class="material-icons icon-color mr-1">fitness_center</span>
+        <ion-input class="input" formControlName="name" placeholder="Sortie tempo"></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="training-form__field">
+      <small class="training-form__label">Programme</small>
+      <ion-item lines="none" [formGroup]="staminaTrainingForm">
+        <span class="material-icons icon-color mr-1">calendar_month</span>
+        <ion-select class="input select-input mx-1" formControlName="program" placeholder="Programme">
+          @for(program of programs(); track program.id){
+            <ion-select-option [value]="program.id">{{ program.name }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+    </div>
+  </div>
+
+  <div class="training-form__field">
+    <small class="training-form__label">Actif</small>
+    <ion-item lines="none" [formGroup]="staminaTrainingForm">
+      <span class="material-icons icon-color mr-1">toggle_on</span>
+      <ion-toggle formControlName="isActive" justify="space-between">Entrainement actif</ion-toggle>
+    </ion-item>
+  </div>
+
+  <app-sport-selects [staminaTrainingForm]="staminaTrainingForm" />
+
+  <div class="training-form__grid">
+    <div class="training-form__field">
+      <small class="training-form__label">Temps prévu</small>
+      <ion-item lines="none" [formGroup]="staminaTrainingForm">
+        <span class="material-icons icon-color mr-3">alarm</span>
+        <ion-input class="input" type="number" formControlName="predictedTime" placeholder="48"></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="training-form__field">
+      <small class="training-form__label">Kilomètres prévus</small>
+      <ion-item lines="none" [formGroup]="staminaTrainingForm">
+        <span class="material-icons icon-color mr-3">directions_walk</span>
+        <ion-input class="input" type="number" formControlName="predictedKilometers" placeholder="10"></ion-input>
+      </ion-item>
+    </div>
+  </div>
+
+  <div class="training-form__field">
+    <small class="training-form__label">Difficulté prévue</small>
+    <ion-item lines="none" [formGroup]="staminaTrainingForm">
+      <div class="training-form__range-wrapper">
+        <div class="training-form__range-header">
+          <span class="material-icons icon-color">star</span>
+          <strong>{{ staminaTrainingForm.value?.predictedDifficulty }}/10</strong>
+          <ion-range class="training-form__range" label-placement="end" [label]="staminaTrainingForm.value?.predictedDifficulty"
+                     min="0" max="10" formControlName="predictedDifficulty" />
+        </div>
+
+      </div>
+    </ion-item>
+  </div>
+
+  <div class="training-form__grid">
+    <div class="training-form__field">
+      <small class="training-form__label">Temps echauffement</small>
+      <ion-item lines="none" [formGroup]="staminaTrainingForm">
+        <span class="material-icons icon-color mr-3">timeline</span>
+        <ion-input class="input" type="number" formControlName="predictedWarmupTime" placeholder="12"></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="training-form__field">
+      <small class="training-form__label">Km echauffement</small>
+      <ion-item lines="none" [formGroup]="staminaTrainingForm">
+        <span class="material-icons icon-color mr-3">route</span>
+        <ion-input class="input" type="number" formControlName="predictedWarmupKilometers" placeholder="2.5"></ion-input>
+      </ion-item>
+    </div>
+  </div>
+
+  @if(showPlanning){
+    <div class="training-form__field">
+      <small class="training-form__label">Jours prévus</small>
+      <ion-item lines="none" [formGroup]="staminaTrainingForm">
+        <span class="material-icons icon-color mr-2">calendar_today</span>
+        <ion-select class="input select-input" formControlName="recurrenceDays" multiple="true" placeholder="Choisir les jours">
+          @for(day of recurrenceDays; track day){
+            <ion-select-option [value]="day">{{ day }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <div class="training-form__field">
+      <small class="training-form__label">Rythme</small>
+      <ion-item lines="none" [formGroup]="staminaTrainingForm">
+        <span class="material-icons icon-color mr-2">repeat</span>
+        <ion-select class="input select-input" formControlName="recurrenceFrequency" placeholder="Rythme">
+          @for(frequency of Object.values(TrainingRecurrenceFrequency); track frequency){
+            <ion-select-option [value]="frequency">{{ frequency }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+    </div>
+  }
+</section>

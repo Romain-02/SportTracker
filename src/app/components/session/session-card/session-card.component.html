@@ -1,0 +1,82 @@
+<ion-card class="session-card" [class.session-card--realised]="staminaSession.realised">
+  <div class="session-card__glow"></div>
+
+  <ion-card-content class="session-card__content">
+    <div class="session-card__status" [class.session-card__status--pending]="!staminaSession.realised">
+      <span class="material-icons">{{ staminaSession.realised ? 'check_circle' : 'schedule' }}</span>
+    </div>
+
+    <div class="session-card__badge">
+      <span class="material-icons session-card__badge-icon">{{ staminaSession.sport?.name | sport }}</span>
+      <span>{{ staminaSession.sport?.name }}</span>
+      @if(staminaSession.sportType){
+        <span class="session-card__badge-separator"></span>
+        <span>{{ staminaSession.sportType.name }}</span>
+      }
+    </div>
+
+    <div class="session-card__header">
+      <div>
+        @if(staminaSession.label){
+          <ion-card-title class="session-card__title">{{ staminaSession.label }}</ion-card-title>
+        } @else if(staminaSession.staminaTraining?.name){
+          <ion-card-title class="session-card__title">{{ staminaSession.staminaTraining?.name }}</ion-card-title>
+        } @else if (staminaSession.sportType) {
+          <ion-card-title class="session-card__title">Sortie {{ staminaSession.sportType?.name }}</ion-card-title>
+        } @else {
+          <ion-card-title class="session-card__title">Sortie {{ staminaSession.sport?.name }}</ion-card-title>
+        }
+
+        <div class="session-card__meta">
+          <div class="session-card__meta-item">
+            <ion-icon name="calendar-number-outline"></ion-icon>
+            <span>{{ staminaSession.date | date:'longDate' }}</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="session-card__score">
+        <div>
+          <strong>{{ displayDifficulty }}</strong>
+          <span class="material-icons ">star</span>
+        </div>
+        <span class="session-card__score_label">effort</span>
+      </div>
+    </div>
+
+    <div class="session-card__stats">
+      <div class="session-card__stat">
+        <span class="session-card__stat-label">Distance</span>
+        <strong class="session-card__stat-value">{{ displayKilometers }} km</strong>
+      </div>
+      <div class="session-card__stat">
+        <span class="session-card__stat-label">Temps</span>
+        <strong class="session-card__stat-value">{{ displayTime }} min</strong>
+      </div>
+      <div class="session-card__stat">
+        <span class="session-card__stat-label">Vitesse</span>
+        <strong class="session-card__stat-value">{{ displayKilometers / (Math.max(displayTime, 1) / 60) }} km/h</strong>
+      </div>
+    </div>
+
+    <div class="session-card__footer">
+      @if(staminaSession.weatherCondition){
+        <div class="session-card__weather">
+          <span class="material-icons">{{ staminaSession.weatherCondition | weatherCondition }}</span>
+          <span>Meteo suivie</span>
+        </div>
+      } @else {
+        <div class="session-card__weather session-card__weather--muted">
+          <span class="material-icons">cloud_off</span>
+          <span>Sans meteo</span>
+        </div>
+      }
+
+      <div class="session-card__actions">
+        <button type="button" class="session-card__action session-card__action--secondary" (click)="edit.emit()">Modifier</button>
+        <button type="button" class="session-card__action" (click)="viewMore.emit()">Voir plus</button>
+      </div>
+    </div>
+  </ion-card-content>
+</ion-card>

@@ -1,0 +1,26 @@
+<ion-header class="app-header">
+  <div class="header-shell">
+    <div class="logo-div">
+      <img
+        class="logo"
+        src="/assets/images/logo.png"
+        alt="logo"
+      />
+    </div>
+
+    <button class="profile-button" type="button" (click)="toggleProfileMenu()">
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </button>
+  </div>
+
+  <ion-popover [isOpen]="isProfileMenuOpen" (didDismiss)="closeProfileMenu()">
+    <ng-template>
+      <ion-list class="profile-menu">
+        <ion-item button detail="false" (click)="syncStrava()" [disabled]="isSyncing()">
+          <ion-icon slot="start" [name]="isSyncing() ? 'sync-outline' : 'cloud-download-outline'"></ion-icon>
+          <ion-label>{{ isSyncing() ? 'Synchronisation Strava...' : 'Recuperer les donnees Strava' }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-template>
+  </ion-popover>
+</ion-header>

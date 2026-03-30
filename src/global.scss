@@ -1,0 +1,131 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+//@import "@ionic/angular/css/padding.css";
+//@import "@ionic/angular/css/float-elements.css";
+//@import "@ionic/angular/css/text-alignment.css";
+//@import "@ionic/angular/css/text-transformation.css";
+//@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import '@ionic/angular/css/palettes/dark.system.css';
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.ion-toast-custom-1{
+  transform: translateY(0)!important;
+}
+
+.ion-toast-custom-2{
+  transform: translateY(80px)!important;
+}
+
+.ion-toast-custom-3{
+  transform: translateY(160px)!important;
+}
+
+.ion-toast-custom-4{
+  transform: translateY(240px)!important;
+}
+
+.ion-toast-custom-5{
+  transform: translateY(320px)!important;
+}
+
+.ion-toast-custom-6{
+  transform: translateY(400px)!important;
+}
+
+.bg-secondary{
+  background-color: #1a1a1a;
+}
+
+html,
+body,
+ion-app {
+  background: var(--app-color-background);
+  color: var(--app-color-text);
+}
+
+ion-content {
+  --background: var(--app-color-background);
+  color: var(--app-color-text);
+}
+
+ion-header,
+ion-toolbar,
+ion-footer,
+ion-tab-bar,
+ion-tab-button,
+ion-card,
+ion-list,
+ion-modal,
+ion-datetime,
+ion-select-popover,
+ion-alert {
+  --background: var(--app-color-surface);
+  --color: var(--app-color-text);
+}
+
+ion-item {
+  --background: transparent;
+  --color: var(--app-color-text);
+  --border-color: transparent;
+}
+
+ion-input,
+ion-select,
+ion-textarea,
+ion-label,
+ion-card-title,
+ion-card-subtitle,
+ion-card-content,
+ion-title {
+  color: var(--app-color-text);
+}
+
+ion-modal::part(content) {
+  background: var(--app-color-background);
+}
+
+ion-datetime-button::part(native),
+ion-checkbox,
+ion-toggle {
+  --color: var(--ion-color-primary);
+}
+
+.material-icons {
+  color: #ff8000;
+}
+
+.toggle-icon{
+  background-color: #ff8000;
+}

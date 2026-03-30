@@ -1,0 +1,148 @@
+.dashboard-page {
+  --background: #050505;
+}
+
+.dashboard-shell {
+  padding: 18px 16px 90px;
+  display: grid;
+  gap: 16px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  color: #f6f7f9;
+}
+
+.dashboard-eyebrow {
+  margin: 0 0 8px;
+  color: #ffd2a3;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dashboard-segment {
+  --background: #111111;
+  border: 1px solid rgba(255, 128, 0, 0.14);
+  border-radius: 18px;
+}
+
+.dashboard-filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.dashboard-filters ion-item {
+  --background: #111111;
+  border-radius: 18px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.summary-card,
+.chart-card,
+.record-card,
+.distance-card,
+.empty-card {
+  padding: 18px;
+  border-radius: 22px;
+  background: #111111;
+  border: 1px solid rgba(255, 128, 0, 0.16);
+}
+
+.summary-card small {
+  display: block;
+  color: #bdb4aa;
+  margin-bottom: 8px;
+}
+
+.summary-card strong {
+  color: #f6f7f9;
+  font-size: 1.2rem;
+}
+
+.chart-card h2,
+.distance-card h2,
+.record-card h2 {
+  margin-top: 0;
+  color: #f6f7f9;
+}
+
+.chart-row {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 12px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.chart-row__label {
+  color: #bdb4aa;
+}
+
+.chart-bars {
+  display: grid;
+  gap: 6px;
+}
+
+.chart-bar {
+  height: 10px;
+  border-radius: 999px;
+}
+
+.chart-bar--distance { background: #ff8000; }
+.chart-bar--time { background: #ffb261; }
+.chart-bar--difficulty { background: #f6f7f9; }
+
+.records-list,
+.distance-section {
+  display: grid;
+  gap: 14px;
+}
+
+.record-card p,
+.distance-note {
+  color: #bdb4aa;
+}
+
+.distance-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.distance-row:last-child {
+  border-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .dashboard-filters,
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .dashboard-header,
+  .dashboard-filters,
+  .summary-grid {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

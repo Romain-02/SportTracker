@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detail de la seance</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="edit()">Modifier</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Fermer</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="detail-content ion-padding">
+  <ion-card class="detail-hero">
+    <ion-card-header>
+      <ion-card-title>{{ staminaSession.label || staminaSession.staminaTraining?.name || staminaSession.sportType?.name || staminaSession.sport?.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ staminaSession.date | date:'fullDate' }}
+      <div class="detail-meta">Sport : {{ staminaSession.sport?.name || 'Non renseigne' }}</div>
+      @if(staminaSession.sportType){
+        <div class="detail-meta">Type : {{ staminaSession.sportType?.name }}</div>
+      }
+      @if(staminaSession.program){
+        <div class="detail-meta">Programme : {{ staminaSession.program.name }}</div>
+      }
+    </ion-card-content>
+  </ion-card>
+
+  <div class="detail-grid">
+    <ion-card class="detail-card">
+      <ion-card-header>
+        <ion-card-title>Seance</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div>Terminee : {{ staminaSession.realised ? 'Oui' : 'Non' }}</div>
+        <div>Difficulte : {{ staminaSession.realised ? (staminaSession.realDifficulty + '/10') : ((staminaSession.predictedDifficulty ?? 'Non renseignee') + (staminaSession.predictedDifficulty != null ? '/10' : '')) }}</div>
+        <div>Distance : {{ staminaSession.realised ? (staminaSession.realKilometers + ' km') : (staminaSession.predictedKilometers != null ? (staminaSession.predictedKilometers + ' km') : 'Non renseignee') }}</div>
+        <div>Temps : {{ staminaSession.realised ? (staminaSession.realTime + ' min') : (staminaSession.predictedTime != null ? (staminaSession.predictedTime + ' min') : 'Non renseigne') }}</div>
+        <div>Temps echauffement : {{ staminaSession.realised ? staminaSession.realWarmupTime : staminaSession.predictedWarmupTime }} min</div>
+        <div>Distance echauffement : {{ staminaSession.realised ? staminaSession.realWarmupKilometers : staminaSession.predictedWarmupKilometers }} km</div>
+        @if(staminaSession.weatherCondition){
+          <div>Meteo : {{ staminaSession.weatherCondition }}</div>
+        }
+      </ion-card-content>
+    </ion-card>
+
+    @if(
+      !staminaSession.realised &&
+      (
+      staminaSession.staminaTraining ||
+      staminaSession.predictedDifficulty != null ||
+      staminaSession.predictedKilometers != null ||
+      staminaSession.predictedTime != null
+      )
+    ){
+      <ion-card class="detail-card">
+        <ion-card-header>
+          <ion-card-title>Prevu</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          @if(staminaSession.staminaTraining){
+            <div>Entrainement lie : {{ staminaSession.staminaTraining.name || 'Non enregistre' }}</div>
+            <div>Sport : {{ staminaSession.staminaTraining?.sport?.name }}</div>
+            <div>Type : {{ staminaSession.staminaTraining?.sportType?.name || 'Non renseigne' }}</div>
+          }
+          <div>Difficulte prevue : {{ staminaSession.predictedDifficulty ?? 'Non renseignee' }}</div>
+          <div>Distance prevue : {{ staminaSession.predictedKilometers ?? 'Non renseignee' }}</div>
+          <div>Temps prevu : {{ staminaSession.predictedTime ?? 'Non renseigne' }}</div>
+          <div>Temps echauffement prevu : {{ staminaSession.predictedWarmupTime ?? 0 }}</div>
+          <div>Distance echauffement prevue : {{ staminaSession.predictedWarmupKilometers ?? 0 }}</div>
+          @if(staminaSession.staminaTraining?.program){
+            <div>Programme lie : {{ staminaSession.staminaTraining?.program?.name }}</div>
+          }
+        </ion-card-content>
+      </ion-card>
+    }
+  </div>
+</ion-content>

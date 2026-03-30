@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isEditMode ? 'Modifier un entrainement' : 'Ajouter un entrainement' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Annuler</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding training-modal-content">
+  <form [formGroup]="trainingForm" class="training-modal-form">
+    <app-stamina-training-form [staminaTrainingForm]="trainingForm" [showPlanning]="true" />
+
+    <ion-item lines="none">
+      <ion-input type="date"
+                 label="Generer jusqu'au"
+                 labelPlacement="stacked"
+                 [(ngModel)]="generationUntil"
+                 [ngModelOptions]="{standalone: true}"
+                 placeholder="Par defaut : 1 an"></ion-input>
+    </ion-item>
+  </form>
+
+  <ion-toolbar class="training-modal-actions">
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="confirm(!!generationUntil)">
+        {{ generationUntil ? 'Enregistrer et generer' : 'Enregistrer' }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-content>

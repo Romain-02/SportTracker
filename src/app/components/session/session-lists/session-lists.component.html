@@ -1,0 +1,25 @@
+<div #topSentinel class="sessions-list__sentinel" aria-hidden="true"></div>
+
+<section class="sessions-list">
+  @for(group of groupedSessions; track group.label){
+    <div class="sessions-list__group">
+      <div class="sessions-list__divider">
+        <span>{{ group.label }}</span>
+      </div>
+
+      @for(staminaSession of group.sessions; track staminaSession.id){
+        <div class="session-item"
+             [id]="staminaSession.id === anchorSessionId ? getSessionAnchorId(staminaSession.id) : null">
+          <app-session-card [staminaSession]="staminaSession"
+                            class="app-session-card"
+                            (viewMore)="openSession.emit(staminaSession.id)"
+                            (edit)="editSession.emit(staminaSession.id)" />
+        </div>
+      }
+    </div>
+  } @empty {
+    <div class="sessions-list__empty">Aucune seance sur cette plage.</div>
+  }
+</section>
+
+<div #bottomSentinel class="sessions-list__sentinel" aria-hidden="true"></div>

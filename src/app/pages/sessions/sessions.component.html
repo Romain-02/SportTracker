@@ -1,0 +1,89 @@
+<ion-content color="secondary" class="activities-page" fixed-slot-placement="before">
+  <section class="activities-shell">
+    <div class="activities-header">
+      <div>
+        <p class="activities-eyebrow">Activites</p>
+        <h1 class="activities-title">Seances et entrainements</h1>
+      </div>
+    </div>
+
+    <div class="activities-tabs">
+      <button class="activities-tab"
+              [class.activities-tab--active]="activityTab === 'sessions'"
+              (click)="activityTab = 'sessions'">
+        <ion-icon name="flash-outline"></ion-icon>
+        <span>Seances</span>
+      </button>
+
+      <button class="activities-tab"
+              [class.activities-tab--active]="activityTab === 'trainings'"
+              (click)="activityTab = 'trainings'">
+        <ion-icon name="barbell-outline"></ion-icon>
+        <span>Entrainements</span>
+      </button>
+    </div>
+
+    <app-activities-toolbar [sports]="sports()"
+                            [sportTypes]="sportTypes()"
+                            [trainings]="staminaTrainings()"
+                            [selectedSport]="selectedSport"
+                            [selectedSportTypeId]="selectedSportTypeId"
+                            [selectedTrainingId]="selectedTrainingId"
+                            [selectedSessionStatus]="selectedSessionStatus"
+                            [activityTab]="activityTab"
+                            [sessionViewMode]="sessionViewMode"
+                            (selectedSportChange)="setSelectedSport($event)"
+                            (selectedSportTypeIdChange)="setSelectedSportTypeId($event)"
+                            (selectedTrainingIdChange)="setSelectedTrainingId($event)"
+                            (selectedSessionStatusChange)="setSelectedSessionStatus($event)"
+                            (firstDateChange)="setFirstDate($event)"
+                            (secondDateChange)="setSecondDate($event)"
+                            (sessionViewModeChange)="sessionViewMode = $event"
+                            (resetRequested)="resetFilters()" />
+
+    @if(activityTab === 'sessions'){
+      @if(sessionViewMode === 'list'){
+        <app-session-lists [staminaSessions]="filteredSessions()"
+                           [anchorSessionId]="anchorSessionId"
+                           [hasPrevious]="hasPreviousSessions"
+                           [hasNext]="hasNextSessions"
+                           [isLoadingPrevious]="isLoadingPrevious"
+                           [isLoadingNext]="isLoadingNext"
+                           (openSession)="openSession($event)"
+                           (editSession)="editSession($event)"
+                           (loadPrevious)="loadPreviousSessions()"
+                           (loadNext)="loadNextSessions()" />
+      } @else {
+        <section class="week-board">
+          @for(day of weekDays; track day.toISOString()){
+            <div class="week-column">
+              <div class="week-column__header">
+                <strong>{{ day | date:'EEE' }}</strong>
+                <span>{{ day | date:'dd/MM' }}</span>
+              </div>
+
+              <div class="week-column__body">
+                @for(session of sessionsForDay(day); track session.id){
+                  <button class="week-session" (click)="openSession(session.id)">
+                    <span class="week-session__title">{{ session.staminaTraining?.name || session.sportType?.name || session.sport?.name }}</span>
+                    <span class="week-session__meta">{{ getSessionDisplayKilometers(session) }} km - {{ getSessionDisplayTime(session) }} min</span>
+                  </button>
+                } @empty {
+                  <div class="week-empty">Aucune seance</div>
+                }
+              </div>
+            </div>
+          }
+        </section>
+      }
+    } @else {
+      <app-training-list [trainings]="filteredTrainings()" (editTraining)="editTraining($event)" />
+    }
+  </section>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary" (click)="activityTab === 'sessions' ? createSession() : createTraining()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

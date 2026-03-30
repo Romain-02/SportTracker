@@ -1,0 +1,45 @@
+<article class="program-card">
+  <div class="program-card__glow"></div>
+
+  <div class="program-card__content">
+    <div class="program-card__badge">
+      <span>{{ program.isArchived ? 'Archive' : 'En cours' }}</span>
+    </div>
+
+    <div class="program-card__top">
+      <div>
+        <ion-card-title>{{ program.name }}</ion-card-title>
+        <div class="program-card__meta">
+          <div>
+            <ion-icon name="calendar-number-outline"></ion-icon>
+            <span>du {{ program.startDate | date:'longDate' }} au</span>
+            <span>{{ program.endDate | date:'longDate' }}</span>
+          </div>
+          <span>{{ linkedTrainings.length }} entrainement(s)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="program-card__stats">
+      <div class="program-card__stat">
+        <small>Description</small>
+        <strong>{{ program.description }}</strong>
+      </div>
+    </div>
+
+    @if(uniqueSports.length){
+      <div class="program-card__sports">
+        <div>
+          @for(sportName of uniqueSports; track sportName){
+            <span class="program-card__sport-chip">
+              <span class="material-icons">{{ sportName | sport }}</span>
+            </span>
+          }
+        </div>
+        <button class="program-card__action" type="button" (click)="editProgram.emit(program.id)">
+          Modifier
+        </button>
+      </div>
+    }
+  </div>
+</article>

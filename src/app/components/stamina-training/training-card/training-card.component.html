@@ -1,0 +1,68 @@
+<article class="training-card">
+  <div class="training-card__glow"></div>
+
+  <div class="training-card__content">
+    <div class="training-card__badge">
+      <span class="material-icons training-card__badge-icon">{{ training.sport?.name | sport }}</span>
+      <span>{{ training.sport?.name }}</span>
+      @if(training.sportType){
+        <span class="training-card__badge-separator"></span>
+        <span>{{ training.sportType.name }}</span>
+      }
+    </div>
+
+    <div class="training-card__status" [class.training-card__status--inactive]="!training.isActive">
+      <span class="material-icons">{{ training.isActive ? 'check_circle' : 'pause_circle' }}</span>
+    </div>
+
+    <div class="training-card__top">
+      <div>
+        <h2>{{ training.name || training.sportType?.name || training.sport.name }}</h2>
+        <div class="training-card__meta">
+          <span>@if(training.program){ {{ training.program.name }} } @else { Sans programme }</span>
+          <span>{{training.nbStaminaSessions}} séances réalisés</span>
+        </div>
+      </div>
+
+      <div class="training-card__score">
+        <div>
+          <strong>{{ training.predictedDifficulty ?? '?' }}</strong>
+          <span class="material-icons">star</span>
+        </div>
+        <span class="training-card__score-label">effort</span>
+      </div>
+    </div>
+
+    <div class="training-card__stats">
+      <div class="training-card__stat">
+        <small>Distance</small>
+        <strong>{{ training.predictedKilometers ?? '?' }} km</strong>
+      </div>
+      <div class="training-card__stat">
+        <small>Temps</small>
+        <strong>{{ training.predictedTime ?? '?' }} min</strong>
+      </div>
+      <div class="training-card__stat">
+        <small>Difficulté</small>
+        <strong>{{ training.predictedDifficulty ?? '?' }}/10</strong>
+      </div>
+    </div>
+
+    <div class="training-card__footer">
+      <div class="training-card__footer-chip">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <span>{{ summary }}</span>
+      </div>
+      @if((training.predictedWarmupTime ?? 0) > 0 || (training.predictedWarmupKilometers ?? 0) > 0){
+        <div class="training-card__footer-chip">
+          <ion-icon name="flame-outline"></ion-icon>
+          <span>{{ training.predictedWarmupTime ?? 0 }} min • {{ training.predictedWarmupKilometers ?? 0 }} km</span>
+        </div>
+      }
+
+      <button class="training-card__action" type="button" (click)="editTraining.emit(training.id)">
+        Modifier
+      </button>
+    </div>
+  </div>
+</article>
