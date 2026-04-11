@@ -1,7 +1,7 @@
 {
   "title": {
-    "fr": "Application de suivi sportif",
-    "en": "Fitness tracking application"
+    "fr": "Sport Tracker",
+    "en": "Sport Tracker"
   },
   "description": {
     "fr": "Développement d’une application mobile avec Ionic permettant d’accompagner les utilisateurs dans leurs séances de sport. L’application est connectée à Strava afin de récupérer et utiliser les données d’activité en temps réel pour faciliter la bascule.",
