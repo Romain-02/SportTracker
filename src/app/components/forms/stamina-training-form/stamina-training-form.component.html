@@ -1,9 +1,8 @@
 <section class="training-form">
-  <div class="training-form__header">
-    <div>
-      <p class="training-form__eyebrow">Nouvel entraînement</p>
-      <ion-card-subtitle class="training-form__title">Information sur l'entraînement</ion-card-subtitle>
-    </div>
+  <div class="training-form__hero">
+    <p class="training-form__eyebrow">Nouvel entrainement</p>
+    <ion-card-subtitle class="training-form__title">Information sur l'entrainement</ion-card-subtitle>
+    <p class="training-form__subtitle">Un plan plus net, plus compact, et plus agréable à parcourir.</p>
   </div>
 
   <div class="training-form__grid">
@@ -28,7 +27,7 @@
     </div>
   </div>
 
-  <div class="training-form__field">
+  <div class="training-form__field training-form__field--toggle">
     <small class="training-form__label">Actif</small>
     <ion-item lines="none" [formGroup]="staminaTrainingForm">
       <span class="material-icons icon-color mr-1">toggle_on</span>
@@ -40,7 +39,7 @@
 
   <div class="training-form__grid">
     <div class="training-form__field">
-      <small class="training-form__label">Temps prévu</small>
+      <small class="training-form__label">Temps prevu</small>
       <ion-item lines="none" [formGroup]="staminaTrainingForm">
         <span class="material-icons icon-color mr-3">alarm</span>
         <ion-input class="input" type="number" formControlName="predictedTime" placeholder="48"></ion-input>
@@ -48,7 +47,7 @@
     </div>
 
     <div class="training-form__field">
-      <small class="training-form__label">Kilomètres prévus</small>
+      <small class="training-form__label">Kilometres prevus</small>
       <ion-item lines="none" [formGroup]="staminaTrainingForm">
         <span class="material-icons icon-color mr-3">directions_walk</span>
         <ion-input class="input" type="number" formControlName="predictedKilometers" placeholder="10"></ion-input>
@@ -56,17 +55,20 @@
     </div>
   </div>
 
-  <div class="training-form__field">
-    <small class="training-form__label">Difficulté prévue</small>
+  <div class="training-form__field training-form__field--range">
+    <small class="training-form__label">Difficulte prevue</small>
     <ion-item lines="none" [formGroup]="staminaTrainingForm">
       <div class="training-form__range-wrapper">
         <div class="training-form__range-header">
           <span class="material-icons icon-color">star</span>
           <strong>{{ staminaTrainingForm.value?.predictedDifficulty }}/10</strong>
-          <ion-range class="training-form__range" label-placement="end" [label]="staminaTrainingForm.value?.predictedDifficulty"
-                     min="0" max="10" formControlName="predictedDifficulty" />
         </div>
-
+        <ion-range class="training-form__range"
+                   label-placement="end"
+                   [label]="staminaTrainingForm.value?.predictedDifficulty"
+                   min="0"
+                   max="10"
+                   formControlName="predictedDifficulty" />
       </div>
     </ion-item>
   </div>
@@ -91,7 +93,7 @@
 
   @if(showPlanning){
     <div class="training-form__field">
-      <small class="training-form__label">Jours prévus</small>
+      <small class="training-form__label">Jours prevus</small>
       <ion-item lines="none" [formGroup]="staminaTrainingForm">
         <span class="material-icons icon-color mr-2">calendar_today</span>
         <ion-select class="input select-input" formControlName="recurrenceDays" multiple="true" placeholder="Choisir les jours">

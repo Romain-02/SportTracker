@@ -1,21 +1,21 @@
 .session-card {
-  --background: linear-gradient(180deg, rgba(27, 27, 27, 0.98), rgba(11, 11, 11, 0.98));
+  --background: linear-gradient(180deg, var(--app-color-surface), var(--app-color-surface-alt));
   position: relative;
   overflow: hidden;
   border-radius: 28px;
-  border: 1px solid rgba(255, 128, 0, 0.22);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
+  border: 1px solid var(--app-color-accent-soft-strong);
+  box-shadow: 0 24px 60px var(--app-color-shadow);
   margin: 0;
 }
 
 .session-card--realised {
-  --background: linear-gradient(180deg, rgba(20, 20, 20, 0.94), rgba(10, 10, 10, 0.94));
-  border-color: rgba(255, 255, 255, 0.08);
+  --background: linear-gradient(180deg, var(--app-color-surface-raised), var(--app-color-surface-raised-alt));
+  border-color: var(--app-color-border);
   opacity: 0.8;
 }
 
 .session-card--realised::before {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.16));
+  background: linear-gradient(90deg, var(--app-color-surface-strong), var(--app-color-surface-alt), var(--app-color-surface-strong));
 }
 
 .session-card::before {
@@ -23,7 +23,7 @@
   position: absolute;
   inset: 0 0 auto;
   height: 6px;
-  background: linear-gradient(90deg, #ff8000 0%, #ff9d3f 55%, #ffd5a6 100%);
+  background: linear-gradient(90deg, var(--app-color-accent) 0%, var(--app-color-accent-light) 55%, var(--app-color-accent-lighter) 100%);
   z-index: 2;
 }
 
@@ -33,7 +33,7 @@
   width: 180px;
   height: 180px;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(255, 128, 0, 0.16) 0%, rgba(255, 128, 0, 0) 72%);
+  background: radial-gradient(circle, var(--app-color-accent-soft-strong) 0%, var(--app-color-transparent) 72%);
   pointer-events: none;
 }
 
@@ -56,13 +56,13 @@
   width: 36px;
   height: 36px;
   border-radius: 999px;
-  background: rgba(48, 193, 111, 0.18);
-  color: #7ff0a1;
+  background: var(--app-color-success-soft);
+  color: var(--app-color-success);
 }
 
 .session-card__status--pending {
-  background: rgba(255, 128, 0, 0.18);
-  color: #ffd2a3;
+  background: var(--app-color-accent-soft-strong);
+  color: var(--app-color-accent-strong);
 }
 
 .session-card__badge {
@@ -72,8 +72,8 @@
   width: fit-content;
   padding: 8px 12px;
   border-radius: 999px;
-  background: rgba(255, 128, 0, 0.14);
-  color: #ffd2a3;
+  background: var(--app-color-accent-soft);
+  color: var(--app-color-accent-strong);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -100,7 +100,7 @@
 }
 
 .session-card__title {
-  color: #f6f7f9;
+  color: var(--app-color-text);
   font-size: clamp(1.45rem, 4vw, 1.8rem);
   font-weight: 800;
   line-height: 1.05;
@@ -118,7 +118,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: #bdb4aa;
+  color: var(--app-color-text-muted);
   font-size: 0.85rem;
 }
 
@@ -126,21 +126,21 @@
   min-width: 76px;
   padding: 12px 10px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--app-color-surface);
+  border: 1px solid var(--app-color-border);
   text-align: center;
 }
 
 .session-card__score strong {
   display: block;
-  color: #ff8000;
+  color: var(--app-color-accent);
   font-size: 1.6rem;
   font-weight: 800;
   line-height: 1;
 }
 
 .session-card__score_label {
-  color: #bdb4aa;
+  color: var(--app-color-text-muted);
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -161,14 +161,14 @@
 .session-card__stat {
   padding: 12px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--app-color-surface);
+  border: 1px solid var(--app-color-border);
   width: 100%;
 }
 
 .session-card__stat-label {
   display: block;
-  color: #bdb4aa;
+  color: var(--app-color-text-muted);
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.09em;
@@ -176,7 +176,7 @@
 }
 
 .session-card__stat-value {
-  color: #f6f7f9;
+  color: var(--app-color-text);
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
@@ -191,13 +191,13 @@
 .session-card__panel {
   padding: 14px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--app-color-surface);
+  border: 1px solid var(--app-color-border);
 }
 
 .session-card__panel-title {
   margin: 0 0 12px;
-  color: #ffd2a3;
+  color: var(--app-color-accent-strong);
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -219,7 +219,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #f6f7f9;
+  color: var(--app-color-text);
   font-size: 0.82rem;
 }
 
@@ -228,23 +228,23 @@
 }
 
 .session-card__weather--muted {
-  color: #9f978d;
+  color: var(--app-color-text-muted);
 }
 
 .session-card__weather--muted .material-icons {
-  color: #9f978d;
+  color: var(--app-color-text-muted);
 }
 
 .session-card__action {
   border: 0;
   border-radius: 14px;
   padding: 10px 14px;
-  background: rgba(255, 128, 0, 0.14);
-  color: #ffd2a3;
+  background: var(--app-color-accent-soft);
+  color: var(--app-color-accent-strong);
   font-weight: 700;
 }
 
 .session-card__action--secondary {
-  background: rgba(255, 255, 255, 0.06);
-  color: #f6f7f9;
+  background: var(--app-color-surface);
+  color: var(--app-color-text);
 }

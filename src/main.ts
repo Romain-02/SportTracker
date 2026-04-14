@@ -12,6 +12,7 @@ import {enableProdMode, importProvidersFrom, inject, provideAppInitializer, prov
 import {Capacitor} from "@capacitor/core";
 import {IonicModule} from "@ionic/angular";
 import {InitializeAppService} from "./app/services/database/initialize-app.service";
+import {ThemeService} from "./app/services/theme.service";
 
 if (environment.production) {
     enableProdMode();
@@ -40,6 +41,10 @@ export function initializeFactory(init: InitializeAppService) {
   return init.initializeApp();
 }
 
+export function initializeThemeFactory(theme: ThemeService) {
+  return () => theme.initializeTheme();
+}
+
 
 bootstrapApplication(AppComponent, {
     providers: [
@@ -47,6 +52,7 @@ bootstrapApplication(AppComponent, {
         importProvidersFrom(IonicModule.forRoot({})),
         provideIonicAngular(),
         provideAppInitializer(() => initializeFactory(inject(InitializeAppService))),
+        provideAppInitializer(() => initializeThemeFactory(inject(ThemeService))()),
         provideRouter(routes, withPreloading(PreloadAllModules)),
     ],
 });

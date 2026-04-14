@@ -2,9 +2,9 @@
   position: relative;
   overflow: hidden;
   border-radius: 28px;
-  background: linear-gradient(180deg, rgba(27, 27, 27, 0.98), rgba(11, 11, 11, 0.98));
-  border: 1px solid rgba(255, 128, 0, 0.22);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
+  background: linear-gradient(180deg, var(--app-color-surface), var(--app-color-surface-alt));
+  border: 1px solid var(--app-color-accent-soft-strong);
+  box-shadow: 0 24px 60px var(--app-color-shadow);
 }
 
 .training-card::before {
@@ -12,7 +12,7 @@
   position: absolute;
   inset: 0 0 auto;
   height: 6px;
-  background: linear-gradient(90deg, #ff8000 0%, #ff9d3f 55%, #ffd5a6 100%);
+  background: linear-gradient(90deg, var(--app-color-accent) 0%, var(--app-color-accent-light) 55%, var(--app-color-accent-lighter) 100%);
   z-index: 1;
 }
 
@@ -22,7 +22,7 @@
   width: 180px;
   height: 180px;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(255, 128, 0, 0.16) 0%, rgba(255, 128, 0, 0) 72%);
+  background: radial-gradient(circle, var(--app-color-accent-soft-strong) 0%, var(--app-color-transparent) 72%);
   pointer-events: none;
 }
 
@@ -45,13 +45,13 @@
   width: 36px;
   height: 36px;
   border-radius: 999px;
-  background: rgba(48, 193, 111, 0.18);
-  color: #7ff0a1;
+  background: var(--app-color-success-soft);
+  color: var(--app-color-success);
 }
 
 .training-card__status--inactive {
-  background: rgba(255, 128, 0, 0.18);
-  color: #ffd2a3;
+  background: var(--app-color-accent-soft-strong);
+  color: var(--app-color-accent-strong);
 }
 
 .training-card__badge {
@@ -61,8 +61,8 @@
   width: fit-content;
   padding: 8px 12px;
   border-radius: 999px;
-  background: rgba(255, 128, 0, 0.14);
-  color: #ffd2a3;
+  background: var(--app-color-accent-soft);
+  color: var(--app-color-accent-strong);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -90,7 +90,7 @@
 
 .training-card__top h2 {
   margin: 0 0 4px;
-  color: #f6f7f9;
+  color: var(--app-color-text);
   font-size: clamp(1.45rem, 4vw, 1.8rem);
   font-weight: 800;
   line-height: 1.05;
@@ -100,7 +100,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
-  color: #bdb4aa;
+  color: var(--app-color-text-muted);
   font-size: 0.85rem;
   flex-direction: column;
 }
@@ -109,8 +109,8 @@
   min-width: 76px;
   padding: 12px 10px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--app-color-surface);
+  border: 1px solid var(--app-color-border);
   text-align: center;
 }
 
@@ -122,19 +122,19 @@
 }
 
 .training-card__score strong {
-  color: #ff8000;
+  color: var(--app-color-accent);
   font-size: 1.6rem;
   font-weight: 800;
   line-height: 1;
 }
 
 .training-card__score ion-icon {
-  color: #ff8000;
+  color: var(--app-color-accent);
   font-size: 1rem;
 }
 
 .training-card__score-label {
-  color: #bdb4aa;
+  color: var(--app-color-text-muted);
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -148,14 +148,14 @@
 .training-card__stat {
   padding: 12px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--app-color-surface);
+  border: 1px solid var(--app-color-border);
   width: 100%;
 }
 
 .training-card__stats small {
   display: block;
-  color: #bdb4aa;
+  color: var(--app-color-text-muted);
   margin-bottom: 6px;
   font-size: 0.68rem;
   text-transform: uppercase;
@@ -163,7 +163,7 @@
 }
 
 .training-card__stats strong {
-  color: #f6f7f9;
+  color: var(--app-color-text);
   font-size: 1rem;
   font-weight: 700;
 }
@@ -182,8 +182,8 @@
   gap: 8px;
   padding: 10px 12px;
   border-radius: 14px;
-  background: rgba(255, 128, 0, 0.12);
-  color: #ffd2a3;
+  background: var(--app-color-accent-soft);
+  color: var(--app-color-accent-strong);
   font-size: 0.82rem;
   font-weight: 600;
 }
@@ -192,12 +192,12 @@
   border: 0;
   border-radius: 14px;
   padding: 10px 14px;
-  background: rgba(255, 128, 0, 0.14);
-  color: #ffd2a3;
+  background: var(--app-color-accent-soft);
+  color: var(--app-color-accent-strong);
   font-weight: 700;
 }
 
 .training-card__footer-chip--muted {
-  background: rgba(255, 255, 255, 0.04);
-  color: #f6f7f9;
+  background: var(--app-color-surface);
+  color: var(--app-color-text);
 }

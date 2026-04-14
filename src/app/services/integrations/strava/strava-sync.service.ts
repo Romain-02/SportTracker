@@ -42,15 +42,15 @@ export class StravaSyncService {
 
   public async loginToStrava(): Promise<void> {
     const clientId: string | undefined = environment.strava.clientId?.trim();
-    const redirectUri: string | undefined = environment.strava.redirectUri?.trim();
-    const authUrl: string | undefined = environment.strava.authUrl?.trim();
+    const redirectUrl: string | undefined = environment.redirectUrl?.trim();
+    const stravaAuthUrl: string | undefined = environment.strava.authUrl?.trim();
 
-    if (!clientId || !redirectUri) {
+    if (!clientId || !redirectUrl) {
       await this.toastService.showError("Il faut renseigner le client ID et le redirect URI pour Strava.");
       return;
     }
 
-    const authUrl: string = `${stravaAuthUrl}?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(redirectUri)}&scope=activity:read_all`;
+    const authUrl: string = `${stravaAuthUrl}?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(redirectUrl)}&scope=activity:read_all`;
     window.open(authUrl, '_blank');
 
     await this.toastService.showSuccess("Une nouvelle fenetre s'est ouverte pour se connecter a Strava. Apres connexion, revenez sur l'application pour synchroniser vos activites.");
@@ -61,7 +61,7 @@ export class StravaSyncService {
       return;
     }
 
-    const accessToken: string | undefined = environment.strava.accessToken?.trim();
+    const accessToken: string | undefined = environment.strava.refreshToken?.trim();
     if (!accessToken) {
       await this.toastService.showError("Il faut renseigner le token d'acces Strava.");
       return;
@@ -108,7 +108,7 @@ export class StravaSyncService {
 
         const pendingSession = matchingSessions.find((session) => !session.realised);
         if (pendingSession) {
-          const updated = await this.updatePendingSession(pendingSession, activity);
+          const updated: boolean = await this.updatePendingSession(pendingSession, activity);
           counters.updated += updated ? 1 : 0;
           counters.skipped += updated ? 0 : 1;
           if (updated) {
@@ -129,7 +129,7 @@ export class StravaSyncService {
           continue;
         }
 
-        const created = await this.createSessionFromActivity(activity, target, sessionDate);
+        const created: boolean = await this.createSessionFromActivity(activity, target, sessionDate);
         counters.created += created ? 1 : 0;
         counters.skipped += created ? 0 : 1;
       }

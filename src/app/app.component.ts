@@ -1,8 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {IonApp, IonRouterOutlet} from '@ionic/angular/standalone';
 import {registerLocaleData} from "@angular/common";
 import localeFr from '@angular/common/locales/fr';
+import {Capacitor} from "@capacitor/core";
 import {UpdateService} from "./services/versions/update-version.service";
+import {StatusBar} from "@capacitor/status-bar";
+import {ThemeService} from "./services/theme.service";
 
 @Component({
   selector: 'app-root',
@@ -12,11 +15,18 @@ import {UpdateService} from "./services/versions/update-version.service";
 })
 export class AppComponent implements OnInit{
 
-  constructor(private updateService: UpdateService) {
+  private readonly updateService = inject(UpdateService);
+  private readonly themeService = inject(ThemeService);
+
+  constructor() {
     registerLocaleData(localeFr, 'fr');
   }
 
-  async ngOnInit() {
-    await this.updateService.checkForUpdates();
+  ngOnInit() {
+    if (Capacitor.getPlatform() !== 'web') {
+      void StatusBar.show();
+      void this.themeService.syncSystemBars();
+    }
+    void this.updateService.checkForUpdates();
   }
 }

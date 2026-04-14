@@ -1,48 +1,97 @@
 .program-form {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 8px 0;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.program-form__hero {
+  padding: 16px 18px;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--app-color-accent) 14%, transparent), transparent 42%),
+    linear-gradient(180deg, color-mix(in srgb, var(--app-color-surface) 88%, white 3%), var(--app-color-surface-alt));
+  border: 1px solid color-mix(in srgb, var(--app-color-accent) 18%, var(--app-color-border));
+  box-shadow: 0 16px 36px color-mix(in srgb, black 18%, transparent);
 }
 
 .program-form__eyebrow {
-  margin: 0 0 8px;
-  color: #ffd2a3;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  margin: 0 0 6px;
+  color: var(--app-color-accent-strong);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .program-form__title {
-  color: #f6f7f9;
+  margin: 0;
+  color: var(--app-color-text);
+}
+
+.program-form__subtitle {
+  margin: 8px 0 0;
+  color: var(--app-color-text-muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
 }
 
 .program-form__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
 }
 
 .program-form__field {
-  padding: 14px 16px;
-  border-radius: 22px;
-  background: linear-gradient(180deg, rgba(20, 20, 20, 0.96), rgba(12, 12, 12, 0.98));
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--app-color-surface) 92%, white 3%), var(--app-color-surface-alt));
+  border: 1px solid color-mix(in srgb, var(--app-color-border) 90%, white 4%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 6%, transparent),
+    0 10px 24px color-mix(in srgb, black 10%, transparent);
 }
 
 .program-form__label {
-  color: #bdb4aa;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 8px;
+  color: var(--app-color-text-muted);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .program-form ion-item {
-  --background: #111111;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 128, 0, 0.16);
+  --background: transparent;
+  --color: var(--app-color-text);
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --min-height: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.program-form__icon {
+  color: var(--app-color-accent);
+  font-size: 1.1rem;
+}
+
+.program-form__input {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 10px !important;
+  border-radius: 14px;
+  background: var(--app-color-surface);
+  border: 1px solid color-mix(in srgb, var(--app-color-border) 92%, white 3%);
+  color: var(--app-color-text);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, white 4%, transparent);
+}
+
+.program-form__input::part(text),
+.program-form__input::part(placeholder) {
+  color: var(--app-color-text);
 }
 
 @media (max-width: 720px) {

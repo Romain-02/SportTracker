@@ -2,9 +2,9 @@
   position: relative;
   overflow: hidden;
   border-radius: 28px;
-  background: linear-gradient(180deg, rgba(27, 27, 27, 0.98), rgba(11, 11, 11, 0.98));
-  border: 1px solid rgba(255, 128, 0, 0.22);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
+  background: linear-gradient(180deg, var(--app-color-surface), var(--app-color-surface-alt));
+  border: 1px solid var(--app-color-accent-soft-strong);
+  box-shadow: 0 24px 60px var(--app-color-shadow);
 }
 
 .program-card::before {
@@ -12,7 +12,7 @@
   position: absolute;
   inset: 0 0 auto;
   height: 6px;
-  background: linear-gradient(90deg, #ff8000 0%, #ff9d3f 55%, #ffd5a6 100%);
+  background: linear-gradient(90deg, var(--app-color-accent) 0%, var(--app-color-accent-light) 55%, var(--app-color-accent-lighter) 100%);
 }
 
 .program-card__glow {
@@ -21,7 +21,7 @@
   width: 180px;
   height: 180px;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(255, 128, 0, 0.16) 0%, rgba(255, 128, 0, 0) 72%);
+  background: radial-gradient(circle, var(--app-color-accent-soft-strong) 0%, var(--app-color-transparent) 72%);
 }
 
 .program-card__content {
@@ -38,8 +38,8 @@
   width: fit-content;
   padding: 8px 12px;
   border-radius: 999px;
-  background: rgba(255, 128, 0, 0.14);
-  color: #ffd2a3;
+  background: var(--app-color-accent-soft);
+  color: var(--app-color-accent-strong);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -55,7 +55,7 @@
 .program-card__meta {
   display: flex;
   flex-direction: column;
-  color: #bdb4aa;
+  color: var(--app-color-text-muted);
   font-size: 0.85rem;
   margin-top: 8px;
 }
@@ -76,7 +76,7 @@
   width: 100%;
   padding: 12px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--app-color-surface);
 }
 
 .program-card__stat div{
@@ -87,13 +87,13 @@
 
 .program-card__stat small {
   display: block;
-  color: #bdb4aa;
+  color: var(--app-color-text-muted);
   font-size: 0.68rem;
   text-transform: uppercase;
 }
 
 .program-card__stat strong {
-  color: #f6f7f9;
+  color: var(--app-color-text);
 }
 
 .program-card__sports {
@@ -110,15 +110,15 @@
   width: 36px;
   height: 36px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  color: #ffd2a3;
+  background: var(--app-color-surface);
+  color: var(--app-color-accent-strong);
 }
 
 .program-card__action {
   border: 0;
   border-radius: 14px;
   padding: 10px 14px;
-  background: rgba(255, 128, 0, 0.14);
-  color: #ffd2a3;
+  background: var(--app-color-accent-soft);
+  color: var(--app-color-accent-strong);
   font-weight: 700;
 }

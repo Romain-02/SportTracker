@@ -17,7 +17,7 @@
   font-size: 16px;
   line-height: 22px;
 
-  color: #8c8c8c;
+  color: var(--app-color-text-muted);
 
   margin: 0;
 }
@@ -27,7 +27,16 @@
 }
 
 ion-tab-bar {
-  --background: #111111;
-  --color: #f6f7f9;
-  --color-selected: #ff8000;
+  --background: var(--app-color-surface);
+  --color: var(--app-color-text-muted);
+  --color-selected: var(--app-color-accent);
+  padding-bottom: env(safe-area-inset-bottom, 8px);
+  margin-bottom: 0;
+  box-shadow: 0 -1px 3px var(--app-color-shadow);
+  position: relative;
+  z-index: 999;
+}
+
+ion-content {
+  --padding-bottom: calc(56px + env(safe-area-inset-bottom, 8px)) !important;
 }

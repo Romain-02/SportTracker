@@ -1,9 +1,8 @@
 <section class="pulse-form">
-  <div class="pulse-form__header">
-    <div>
-      <p class="pulse-form__eyebrow">Nouvelle activite</p>
-      <ion-card-subtitle class="pulse-form__title">Informations de la seance</ion-card-subtitle>
-    </div>
+  <div class="pulse-form__hero">
+    <p class="pulse-form__eyebrow">Nouvelle activite</p>
+    <ion-card-subtitle class="pulse-form__title">Informations de la seance</ion-card-subtitle>
+    <p class="pulse-form__subtitle">Un format plus compact, plus net, avec l’essentiel au premier regard.</p>
   </div>
 
   <div class="pulse-form__field pulse-form__field--date">
@@ -71,16 +70,20 @@
     </div>
   </div>
 
-  <div class="pulse-form__field">
+  <div class="pulse-form__field pulse-form__field--range">
     <small class="pulse-form__label">Difficulte de l'activite</small>
     <ion-item lines="none" [formGroup]="staminaSessionForm">
       <div class="pulse-form__range-wrapper">
         <div class="pulse-form__range-header">
           <span class="material-icons icon-color">star</span>
           <strong>{{ staminaSessionForm.value?.realDifficulty }}/10</strong>
-          <ion-range class="pulse-form__range" label-placement="end" [label]="staminaSessionForm.value?.realDifficulty"
-                     min="0" max="10" formControlName="realDifficulty" />
         </div>
+        <ion-range class="pulse-form__range"
+                   label-placement="end"
+                   [label]="staminaSessionForm.value?.realDifficulty"
+                   min="0"
+                   max="10"
+                   formControlName="realDifficulty" />
       </div>
     </ion-item>
   </div>
@@ -115,27 +118,25 @@
         </ion-select>
       </ion-item>
     </div>
-  </div>
 
-  <div class="pulse-form__grid">
-    <div class="pulse-form__field">
-      <small class="pulse-form__label">Programme</small>
-      <ion-item lines="none" [formGroup]="staminaSessionForm">
-        <span class="material-icons icon-color mr-2">calendar_month</span>
-        <ion-select class="input select-input mx-1" formControlName="program" placeholder="Programme">
-          @for(program of programs(); track program){
-            <ion-select-option [value]="program.id">{{ program.name }}</ion-select-option>
-          }
-        </ion-select>
-      </ion-item>
-    </div>
-
-    <div class="pulse-form__field">
+    <div class="pulse-form__field pulse-form__field--toggle">
       <small class="pulse-form__label">Termine</small>
       <ion-item lines="none" [formGroup]="staminaSessionForm">
         <span class="material-icons icon-color mr-2">check_circle</span>
         <ion-toggle formControlName="realised" justify="space-between">Session terminee</ion-toggle>
       </ion-item>
     </div>
+  </div>
+
+  <div class="pulse-form__field">
+    <small class="pulse-form__label">Programme</small>
+    <ion-item lines="none" [formGroup]="staminaSessionForm">
+      <span class="material-icons icon-color mr-2">calendar_month</span>
+      <ion-select class="input select-input mx-1" formControlName="program" placeholder="Programme">
+        @for(program of programs(); track program){
+          <ion-select-option [value]="program.id">{{ program.name }}</ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
   </div>
 </section>
