@@ -4,6 +4,9 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: write
+
 jobs:
   check-version-and-release:
     runs-on: ubuntu-latest
@@ -11,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Récupère tout l'historique pour comparer les tags
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -25,14 +28,12 @@ jobs:
         id: version
         run: |
           CURRENT_VERSION=$(node -p "require('./package.json').version")
-          echo "Current version: $CURRENT_VERSION"
           echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
 
       - name: Get latest Git tag
         id: latest_tag
         run: |
           LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "none")
-          echo "Latest Git tag: $LATEST_TAG"
           echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
 
       - name: Check if version changed
@@ -40,16 +41,13 @@ jobs:
         run: |
           if [ "${{ steps.latest_tag.outputs.latest_tag }}" != "none" ]; then
             LATEST_VERSION=${{ steps.latest_tag.outputs.latest_tag }}
-            LATEST_VERSION=${LATEST_VERSION#v}  # Supprime le préfixe 'v' si présent
+            LATEST_VERSION=${LATEST_VERSION#v}
             if [ "${{ steps.version.outputs.current_version }}" != "$LATEST_VERSION" ]; then
-              echo "Version changed! Current: ${{ steps.version.outputs.current_version }}, Latest tag: $LATEST_VERSION"
               echo "should_release=true" >> $GITHUB_OUTPUT
             else
-              echo "Version not changed."
               echo "should_release=false" >> $GITHUB_OUTPUT
             fi
           else
-            echo "No previous tag found. First release!"
             echo "should_release=true" >> $GITHUB_OUTPUT
           fi
 
@@ -58,10 +56,11 @@ jobs:
         run: npm run build
 
       - name: Create ZIP archive
+        id: create_zip
         if: steps.version_check.outputs.should_release == 'true'
         run: |
           ZIP_FILE="release-${{ steps.version.outputs.current_version }}.zip"
-          zip -r $ZIP_FILE ./dist ./package.json ./README.md  # Ajoute les fichiers nécessaires
+          zip -r "$ZIP_FILE" ./dist ./package.json ./readme.md
           echo "zip_file=$ZIP_FILE" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
@@ -70,12 +69,6 @@ jobs:
         with:
           tag_name: v${{ steps.version.outputs.current_version }}
           name: Release v${{ steps.version.outputs.current_version }}
-          body: |
-            ### Changements
-            - Mise à jour de la version ${{ steps.version.outputs.current_version }}
-            - [Ajoute ici les notes de release]
-          files: ${{ steps.version_check.outputs.zip_file }}
+          files: ${{ steps.create_zip.outputs.zip_file }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Token automatique fourni par GitHub
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
