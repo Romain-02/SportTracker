@@ -321,3 +321,6 @@ android
 src/assets/sql-wasm.wasm
 
 android.db
+
+### environment ###
+src/environments/environment.ts

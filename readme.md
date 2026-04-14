@@ -28,6 +28,7 @@ ionic serve
 ````
 ionic build
 npx cap sync
+npx cap add android
 npx cap open android
 ````
 

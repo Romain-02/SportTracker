@@ -1,9 +1,20 @@
 .dashboard-page {
-  --background: #050505;
+  --background: var(--app-color-background);
 }
 
 .dashboard-shell {
-  padding: 18px 16px 90px;
+  padding: 18px 16px 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 8px));
+  display: grid;
+  gap: 16px;
+}
+.dashboard-page {
+  --background: var(--app-color-background);
+}
+
+.dashboard-shell {
+  padding: 18px 16px 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 8px));
   display: grid;
   gap: 16px;
 }
@@ -17,12 +28,12 @@
 
 .dashboard-header h1 {
   margin: 0;
-  color: #f6f7f9;
+  color: var(--app-color-text);
 }
 
 .dashboard-eyebrow {
   margin: 0 0 8px;
-  color: #ffd2a3;
+  color: var(--app-color-accent-strong);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -30,8 +41,8 @@
 }
 
 .dashboard-segment {
-  --background: #111111;
-  border: 1px solid rgba(255, 128, 0, 0.14);
+  --background: var(--app-color-surface);
+  border: 1px solid var(--app-color-accent-soft);
   border-radius: 18px;
 }
 
@@ -42,7 +53,7 @@
 }
 
 .dashboard-filters ion-item {
-  --background: #111111;
+  --background: var(--app-color-surface);
   border-radius: 18px;
 }
 
@@ -59,18 +70,18 @@
 .empty-card {
   padding: 18px;
   border-radius: 22px;
-  background: #111111;
-  border: 1px solid rgba(255, 128, 0, 0.16);
+  background: var(--app-color-surface);
+  border: 1px solid var(--app-color-accent-soft);
 }
 
 .summary-card small {
   display: block;
-  color: #bdb4aa;
+  color: var(--app-color-text-muted);
   margin-bottom: 8px;
 }
 
 .summary-card strong {
-  color: #f6f7f9;
+  color: var(--app-color-text);
   font-size: 1.2rem;
 }
 
@@ -78,7 +89,7 @@
 .distance-card h2,
 .record-card h2 {
   margin-top: 0;
-  color: #f6f7f9;
+  color: var(--app-color-text);
 }
 
 .chart-row {
@@ -90,7 +101,7 @@
 }
 
 .chart-row__label {
-  color: #bdb4aa;
+  color: var(--app-color-text-muted);
 }
 
 .chart-bars {
@@ -103,9 +114,9 @@
   border-radius: 999px;
 }
 
-.chart-bar--distance { background: #ff8000; }
-.chart-bar--time { background: #ffb261; }
-.chart-bar--difficulty { background: #f6f7f9; }
+.chart-bar--distance { background: var(--app-color-accent); }
+.chart-bar--time { background: var(--app-color-accent-strong); }
+.chart-bar--difficulty { background: var(--app-color-surface-strong); }
 
 .records-list,
 .distance-section {
@@ -115,7 +126,7 @@
 
 .record-card p,
 .distance-note {
-  color: #bdb4aa;
+  color: var(--app-color-text-muted);
 }
 
 .distance-row {
@@ -123,7 +134,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--app-color-border);
 }
 
 .distance-row:last-child {

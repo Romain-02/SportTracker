@@ -1,23 +1,24 @@
 <section class="program-form">
-  <div class="program-form__header">
-    <div>
-      <p class="program-form__eyebrow">Nouveau programme</p>
-      <ion-card-subtitle class="program-form__title">Informations du programme</ion-card-subtitle>
-    </div>
+  <div class="program-form__hero">
+    <p class="program-form__eyebrow">Nouveau programme</p>
+    <ion-card-subtitle class="program-form__title">Informations du programme</ion-card-subtitle>
+    <p class="program-form__subtitle">Une structure plus lisible, plus respirante, avec moins de volume visuel.</p>
   </div>
 
   <div class="program-form__grid">
     <div class="program-form__field">
       <small class="program-form__label">Nom</small>
       <ion-item lines="none" [formGroup]="programForm">
-        <ion-input formControlName="name" placeholder="Preparation 10 km"></ion-input>
+        <span class="material-icons program-form__icon">flag</span>
+        <ion-input class="program-form__input" formControlName="name" placeholder="Preparation 10 km"></ion-input>
       </ion-item>
     </div>
 
     <div class="program-form__field">
       <small class="program-form__label">Description</small>
-      <ion-item lines="5" [formGroup]="programForm">
-        <ion-input formControlName="description" placeholder="Cycle de 8 semaines"></ion-input>
+      <ion-item lines="none" [formGroup]="programForm">
+        <span class="material-icons program-form__icon">notes</span>
+        <ion-input class="program-form__input" formControlName="description" placeholder="Cycle de 8 semaines"></ion-input>
       </ion-item>
     </div>
   </div>
@@ -26,14 +27,16 @@
     <div class="program-form__field">
       <small class="program-form__label">Debut</small>
       <ion-item lines="none" [formGroup]="programForm">
-        <ion-input type="date" formControlName="startDate"></ion-input>
+        <span class="material-icons program-form__icon">calendar_month</span>
+        <ion-input class="program-form__input" type="date" formControlName="startDate"></ion-input>
       </ion-item>
     </div>
 
     <div class="program-form__field">
       <small class="program-form__label">Fin prevue</small>
       <ion-item lines="none" [formGroup]="programForm">
-        <ion-input type="date" formControlName="endDate"></ion-input>
+        <span class="material-icons program-form__icon">event</span>
+        <ion-input class="program-form__input" type="date" formControlName="endDate"></ion-input>
       </ion-item>
     </div>
   </div>
@@ -41,7 +44,8 @@
   <div class="program-form__field">
     <small class="program-form__label">Entrainements associes</small>
     <ion-item lines="none" [formGroup]="programForm">
-      <ion-select formControlName="trainingIds" multiple="true" placeholder="Associer des entrainements">
+      <span class="material-icons program-form__icon">playlist_add_check</span>
+      <ion-select class="program-form__input" formControlName="trainingIds" multiple="true" placeholder="Associer des entrainements">
         @for(training of trainings(); track training.id){
           <ion-select-option [value]="training.id">{{ training.name || training.sportType?.name || training.sport.name }}</ion-select-option>
         }
@@ -52,6 +56,7 @@
   <div class="program-form__field">
     <small class="program-form__label">Archive</small>
     <ion-item lines="none" [formGroup]="programForm">
+      <span class="material-icons program-form__icon">inventory_2</span>
       <ion-toggle formControlName="isArchived" justify="space-between">Programme archive</ion-toggle>
     </ion-item>
   </div>

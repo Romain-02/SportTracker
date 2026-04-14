@@ -39,6 +39,7 @@
     "@ionic/angular": "^8.8.2",
     "@ionic/core": "^8.8.2",
     "@ionic/pwa-elements": "^3.3.0",
+    "@tailwindcss/postcss": "^4.2.2",
     "@types/leaflet": "^1.9.18",
     "ionicons": "^7.0.0",
     "leaflet": "^1.9.4",
@@ -65,8 +66,8 @@
     "autoprefixer": "^10.4.7",
     "copyfiles": "^2.4.1",
     "crypto-browserify": "^3.12.1",
-    "eslint": "^10.1.0",
-    "eslint-plugin-import": "^2.29.1",
+    "eslint": "^9.39.4",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsdoc": "^48.2.1",
     "eslint-plugin-prefer-arrow": "1.2.2",
     "jasmine-core": "~5.1.0",
@@ -80,7 +81,7 @@
     "postcss": "^8.4.14",
     "stream-browserify": "^3.0.0",
     "tailwindcss": "^4.2.2",
-    "typescript": "^6.0.2",
+    "typescript": "^5.9.3",
     "vm-browserify": "^1.1.2"
   },
   "description": "An Ionic project"

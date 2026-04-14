@@ -1,9 +1,10 @@
 .activities-page {
-  --background: #050505;
+  --background: var(--app-color-background);
 }
 
 .activities-shell {
-  padding: 18px 16px 90px;
+  padding: 18px 16px 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 8px));
 }
 
 .activities-header {
@@ -16,7 +17,7 @@
 
 .activities-eyebrow {
   margin: 0 0 8px;
-  color: #ffd2a3;
+  color: var(--app-color-accent-strong);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -25,14 +26,14 @@
 
 .activities-title {
   margin: 0;
-  color: #f6f7f9;
+  color: var(--app-color-text);
   font-size: 1.8rem;
   line-height: 1.05;
 }
 
 .activities-tabs {
   display: grid;
-  grid-template-columns: 1fr 1fr!important;
+  grid-template-columns: 1fr 1fr !important;
   gap: 10px;
   margin-bottom: 14px;
 }
@@ -44,10 +45,10 @@
   gap: 10px;
   min-height: 52px;
   padding: 0 16px;
-  border: 1px solid rgba(255, 128, 0, 0.14);
+  border: 1px solid var(--app-color-accent-soft);
   border-radius: 18px;
-  background: #111111;
-  color: #bdb4aa;
+  background: var(--app-color-surface);
+  color: var(--app-color-text-muted);
   font-size: 0.96rem;
   font-weight: 700;
 }
@@ -57,9 +58,9 @@
 }
 
 .activities-tab--active {
-  background: linear-gradient(180deg, rgba(255, 128, 0, 0.18), rgba(255, 128, 0, 0.08));
-  color: #f6f7f9;
-  border-color: rgba(255, 128, 0, 0.28);
+  background: linear-gradient(180deg, var(--app-color-accent-soft-strong), var(--app-color-accent-soft));
+  color: var(--app-color-text);
+  border-color: var(--app-color-accent-soft-strong);
 }
 
 .week-board {
@@ -72,8 +73,8 @@
 
 .week-column {
   min-height: 280px;
-  background: #111111;
-  border: 1px solid rgba(255, 128, 0, 0.12);
+  background: var(--app-color-surface);
+  border: 1px solid var(--app-color-accent-soft);
   border-radius: 22px;
   overflow: hidden;
 }
@@ -83,8 +84,8 @@
   flex-direction: column;
   gap: 4px;
   padding: 14px;
-  background: rgba(255, 128, 0, 0.08);
-  color: #f6f7f9;
+  background: var(--app-color-accent-soft);
+  color: var(--app-color-text);
 }
 
 .week-column__body {
@@ -98,8 +99,8 @@
   border-radius: 16px;
   padding: 12px;
   text-align: left;
-  background: rgba(255, 255, 255, 0.04);
-  color: #f6f7f9;
+  background: var(--app-color-surface-alt);
+  color: var(--app-color-text);
 }
 
 .week-session__title {
@@ -110,14 +111,14 @@
 
 .week-session__meta,
 .week-empty {
-  color: #bdb4aa;
+  color: var(--app-color-text-muted);
   font-size: 0.8rem;
 }
 
 .empty-state {
   padding: 26px 18px;
   border-radius: 22px;
-  background: #111111;
+  background: var(--app-color-surface);
   text-align: center;
 }
 

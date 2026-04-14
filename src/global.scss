@@ -18,54 +18,42 @@
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
 
-/* Optional CSS utils that can be commented out */
-//@import "@ionic/angular/css/padding.css";
-//@import "@ionic/angular/css/float-elements.css";
-//@import "@ionic/angular/css/text-alignment.css";
-//@import "@ionic/angular/css/text-transformation.css";
-//@import "@ionic/angular/css/flex-utils.css";
+@import 'tailwindcss';
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
-
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-.ion-toast-custom-1{
-  transform: translateY(0)!important;
+/* Safe Area Support */
+:root {
+  --ion-safe-area-top: env(safe-area-inset-top, 0px);
+  --ion-safe-area-right: env(safe-area-inset-right, 0px);
+  --ion-safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --ion-safe-area-left: env(safe-area-inset-left, 0px);
 }
 
-.ion-toast-custom-2{
-  transform: translateY(80px)!important;
+.ion-toast-custom-1 {
+  transform: translateY(0) !important;
 }
 
-.ion-toast-custom-3{
-  transform: translateY(160px)!important;
+.ion-toast-custom-2 {
+  transform: translateY(80px) !important;
 }
 
-.ion-toast-custom-4{
-  transform: translateY(240px)!important;
+.ion-toast-custom-3 {
+  transform: translateY(160px) !important;
 }
 
-.ion-toast-custom-5{
-  transform: translateY(320px)!important;
+.ion-toast-custom-4 {
+  transform: translateY(240px) !important;
 }
 
-.ion-toast-custom-6{
-  transform: translateY(400px)!important;
+.ion-toast-custom-5 {
+  transform: translateY(320px) !important;
 }
 
-.bg-secondary{
-  background-color: #1a1a1a;
+.ion-toast-custom-6 {
+  transform: translateY(400px) !important;
+}
+
+.bg-secondary {
+  background-color: var(--app-color-surface-alt);
 }
 
 html,
@@ -123,9 +111,9 @@ ion-toggle {
 }
 
 .material-icons {
-  color: #ff8000;
+  color: var(--app-color-accent);
 }
 
-.toggle-icon{
-  background-color: #ff8000;
+.toggle-icon {
+  background-color: var(--app-color-accent);
 }

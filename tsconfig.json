@@ -19,6 +19,7 @@
     "target": "es2022",
     "module": "es2020",
     "useDefineForClassFields": false,
+    "skipLibCheck": true,
     "paths": {
       "crypto": [
         "node_modules/crypto-browserify"

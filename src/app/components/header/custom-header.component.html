@@ -1,26 +1,40 @@
 <ion-header class="app-header">
   <div class="header-shell">
     <div class="logo-div">
-      <img
-        class="logo"
-        src="/assets/images/logo.png"
-        alt="logo"
-      />
+      <img class="logo" src="/assets/images/logo.png" alt="Logo de l'application" />
     </div>
 
-    <button class="profile-button" type="button" (click)="toggleProfileMenu()">
-      <ion-icon name="person-circle-outline"></ion-icon>
-    </button>
+    <div class="header-actions">
+      <ion-button
+        class="theme-button"
+        fill="clear"
+        (click)="toggleTheme()"
+        (keydown.enter)="toggleTheme()"
+        (keydown.space)="toggleTheme()"
+        [attr.aria-label]="themeLabel"
+      >
+        <ion-icon [name]="themeIcon"></ion-icon>
+      </ion-button>
+
+      <ion-button
+        class="profile-button"
+        fill="clear"
+        (click)="toggleProfileMenu()"
+        (keydown.enter)="toggleProfileMenu()"
+        (keydown.space)="toggleProfileMenu()"
+        aria-label="Ouvrir le menu profil"
+      >
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-button>
+    </div>
   </div>
 
-  <ion-popover [isOpen]="isProfileMenuOpen" (didDismiss)="closeProfileMenu()">
-    <ng-template>
-      <ion-list class="profile-menu">
-        <ion-item button detail="false" (click)="syncStrava()" [disabled]="isSyncing()">
-          <ion-icon slot="start" [name]="isSyncing() ? 'sync-outline' : 'cloud-download-outline'"></ion-icon>
-          <ion-label>{{ isSyncing() ? 'Synchronisation Strava...' : 'Recuperer les donnees Strava' }}</ion-label>
-        </ion-item>
-      </ion-list>
-    </ng-template>
-  </ion-popover>
+  @if (isProfileMenuOpen) {
+    <div class="profile-menu">
+      <button class="profile-menu-item" type="button" (click)="syncStrava()" [disabled]="isSyncing()">
+        <ion-icon [name]="isSyncing() ? 'sync-outline' : 'cloud-download-outline'"></ion-icon>
+        <span>{{ isSyncing() ? 'Synchronisation Strava...' : 'Recuperer les donnees Strava' }}</span>
+      </button>
+    </div>
+  }
 </ion-header>

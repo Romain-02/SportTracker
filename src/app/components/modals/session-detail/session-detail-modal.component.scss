@@ -1,12 +1,12 @@
 .detail-content {
-  --background: #050505;
+  --background: var(--app-color-background);
 }
 
 .detail-hero,
 .detail-card {
-  --background: #111111;
-  color: #f6f7f9;
-  border: 1px solid rgba(255, 128, 0, 0.18);
+  --background: var(--app-color-surface);
+  color: var(--app-color-text);
+  border: 1px solid var(--app-color-accent-soft-strong);
 }
 
 .detail-grid {
@@ -16,5 +16,5 @@
 
 .detail-meta {
   margin-top: 10px;
-  color: #bdb4aa;
+  color: var(--app-color-text-muted);
 }
