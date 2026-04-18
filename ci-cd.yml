@@ -39,16 +39,20 @@ jobs:
       - name: Check if version changed
         id: version_check
         run: |
-          if [ "${{ steps.latest_tag.outputs.latest_tag }}" != "none" ]; then
-            LATEST_VERSION=${{ steps.latest_tag.outputs.latest_tag }}
-            LATEST_VERSION=${LATEST_VERSION#v}
-            if [ "${{ steps.version.outputs.current_version }}" != "$LATEST_VERSION" ]; then
-              echo "should_release=true" >> $GITHUB_OUTPUT
-            else
-              echo "should_release=false" >> $GITHUB_OUTPUT
-            fi
-          else
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          LATEST_VERSION=${LATEST_TAG#v}
+
+          echo "Current: $CURRENT_VERSION"
+          echo "Latest Tag: $LATEST_VERSION"
+
+          if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
             echo "should_release=true" >> $GITHUB_OUTPUT
+            echo "Version change detected."
+          else
+            echo "should_release=false" >> $GITHUB_OUTPUT
+            echo "No version change. Skipping release."
           fi
 
       - name: Build project
@@ -60,7 +64,12 @@ jobs:
         if: steps.version_check.outputs.should_release == 'true'
         run: |
           ZIP_FILE="release-${{ steps.version.outputs.current_version }}.zip"
-          zip -r "$ZIP_FILE" ./dist ./package.json ./readme.md
+          # On entre dans le dossier dist pour que les fichiers soient à la racine du zip
+          cd dist
+          zip -r "../$ZIP_FILE" .
+          cd ..
+          # On peut ajouter package.json à la racine du zip si vraiment nécessaire pour ton app
+          zip -u "$ZIP_FILE" package.json readme.md
           echo "zip_file=$ZIP_FILE" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
