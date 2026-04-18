@@ -3,7 +3,7 @@ import type {CapacitorConfig} from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'fr.sport.tracker',
   appName: 'sport-tracker',
-  "webDir": "www",
+  "webDir": "dist",
   plugins: {
     StatusBar: {
       overlaysWebView: false,

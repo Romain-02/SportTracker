@@ -1,12 +1,11 @@
 import {DatePipe} from "@angular/common";
-import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {addIcons} from "ionicons";
 import {calendarNumberOutline} from "ionicons/icons";
 import {IonCard, IonCardContent, IonCardTitle, IonIcon} from '@ionic/angular/standalone';
 import {StaminaSession} from "../../../models/StaminaSession";
 import {SportPipe} from "../../../pipes/sport.pipe";
 import {WeatherConditionPipe} from "../../../pipes/weather-condition.pipe";
-import {ToastService} from "../../../services/components/toast.service";
 
 @Component({
   selector: 'app-session-card',
@@ -28,11 +27,8 @@ export class SessionCardComponent {
   @Output() viewMore: EventEmitter<void> = new EventEmitter<void>();
   @Output() edit: EventEmitter<void> = new EventEmitter<void>();
 
-  private toastService: ToastService = inject(ToastService);
-
   constructor() {
     addIcons({calendarNumberOutline});
-    this.toastService.showError("Test").then(() => console.log("test"));
 
   }
 
