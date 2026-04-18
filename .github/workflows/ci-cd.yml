@@ -1,6 +1,7 @@
 name: CI/CD - Create Release on Version Bump
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
 
@@ -55,9 +56,15 @@ jobs:
             echo "No version change. Skipping release."
           fi
 
+      - name: Inject Environment Variables
+        if: steps.version_check.outputs.should_release == 'true'
+        run: |
+          sed -i "s|#{CLIENT_ID}#|${{ secrets.CLIENT_ID }}|g" src/environments/environment.prod.ts
+          sed -i "s|#{REFRESH_TOKEN}#|${{ secrets.REFRESH_TOKEN }}|g" src/environments/environment.prod.ts
+
       - name: Build project
         if: steps.version_check.outputs.should_release == 'true'
-        run: npm run build
+        run: npm run build -- --configuration=production
 
       - name: Create ZIP archive
         id: create_zip
