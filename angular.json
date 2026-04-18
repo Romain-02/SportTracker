@@ -23,7 +23,7 @@
           "options": {
             "localize": true,
             "outputPath": {
-              "base": "www",
+              "base": "dist",
               "browser": ""
             },
             "index": "src/index.html",
