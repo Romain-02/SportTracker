@@ -15,9 +15,9 @@ export class UpdateService {
   constructor() { }
 
   async checkForUpdates() {
-    let attemptedVersion = '';
+    let attemptedVersion: string = '';
 
-    if (!environment.production || !Capacitor.isNativePlatform()) {
+    if (!Capacitor.isNativePlatform()) {
       return;
     }
 

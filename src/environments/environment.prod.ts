@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   strava: {
     clientId: "#{CLIENT_ID}#",
     refreshToken: '#{REFRESH_TOKEN}#',

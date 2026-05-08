@@ -136,8 +136,8 @@ export class StravaSyncService {
 
       await this.staminaSessionService.fetchStaminaSessions();
       await this.showSummary(counters);
-    } catch (_) {
-      await this.toastService.showError("Impossible de recuperer les donnees Strava");
+    } catch (e) {
+      await this.toastService.showError("Impossible de récupérer les données Strava" + e + " " + environment.strava.clientId + " " +environment.strava.refreshToken);
     } finally {
       this.isSyncing.set(false);
     }

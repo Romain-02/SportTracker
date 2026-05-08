@@ -20,14 +20,6 @@
 
 @import 'tailwindcss';
 
-/* Safe Area Support */
-:root {
-  --ion-safe-area-top: env(safe-area-inset-top, 0px);
-  --ion-safe-area-right: env(safe-area-inset-right, 0px);
-  --ion-safe-area-bottom: env(safe-area-inset-bottom, 0px);
-  --ion-safe-area-left: env(safe-area-inset-left, 0px);
-}
-
 .ion-toast-custom-1 {
   transform: translateY(0) !important;
 }
