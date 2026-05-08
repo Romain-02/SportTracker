@@ -30,13 +30,7 @@ ion-tab-bar {
   --background: var(--app-color-surface);
   --color: var(--app-color-text-muted);
   --color-selected: var(--app-color-accent);
-  padding-bottom: env(safe-area-inset-bottom, 8px);
-  margin-bottom: 0;
   box-shadow: 0 -1px 3px var(--app-color-shadow);
   position: relative;
   z-index: 999;
-}
-
-ion-content {
-  --padding-bottom: calc(56px + env(safe-area-inset-bottom, 8px)) !important;
 }

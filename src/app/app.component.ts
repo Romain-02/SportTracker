@@ -4,7 +4,6 @@ import {registerLocaleData} from "@angular/common";
 import localeFr from '@angular/common/locales/fr';
 import {Capacitor} from "@capacitor/core";
 import {UpdateService} from "./services/versions/update-version.service";
-import {StatusBar} from "@capacitor/status-bar";
 import {ThemeService} from "./services/theme.service";
 import {CapacitorUpdater} from "@capgo/capacitor-updater";
 
@@ -25,9 +24,9 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     if (Capacitor.getPlatform() !== 'web') {
-      void StatusBar.show();
       void this.themeService.syncSystemBars();
       void CapacitorUpdater.notifyAppReady();
+      console.log("test: ")
     }
     void this.updateService.checkForUpdates();
   }

@@ -4,17 +4,16 @@
 
 .dashboard-shell {
   padding: 18px 16px 16px;
-  padding-bottom: calc(16px + env(safe-area-inset-bottom, 8px));
   display: grid;
   gap: 16px;
 }
+
 .dashboard-page {
   --background: var(--app-color-background);
 }
 
 .dashboard-shell {
   padding: 18px 16px 16px;
-  padding-bottom: calc(16px + env(safe-area-inset-bottom, 8px));
   display: grid;
   gap: 16px;
 }
@@ -114,9 +113,17 @@
   border-radius: 999px;
 }
 
-.chart-bar--distance { background: var(--app-color-accent); }
-.chart-bar--time { background: var(--app-color-accent-strong); }
-.chart-bar--difficulty { background: var(--app-color-surface-strong); }
+.chart-bar--distance {
+  background: var(--app-color-accent);
+}
+
+.chart-bar--time {
+  background: var(--app-color-accent-strong);
+}
+
+.chart-bar--difficulty {
+  background: var(--app-color-surface-strong);
+}
 
 .records-list,
 .distance-section {
