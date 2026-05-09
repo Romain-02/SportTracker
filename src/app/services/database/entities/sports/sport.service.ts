@@ -16,7 +16,6 @@ export class SportService {
 
   public async fetchSports(): Promise<Sports> {
     if (!this.hasFetchedList) {
-      console.log(`RÃ©cupÃ©ration des sports`);
       const result: SQLResult<Sport> = (await this.databaseApp.database
         .query('SELECT id, name, logo FROM Sport;')).values as SQLResult<Sport>;
 
@@ -38,7 +37,6 @@ export class SportService {
   }
 
   public async getSportById(id: number): Promise<Sport | undefined> {
-    console.log(`RÃ©cupÃ©ration du sport`);
     const result: SQLResult<Sport> = (await this.databaseApp.database
       .query('SELECT id, name, logo FROM Sport WHERE id = ?;', [id])).values as SQLResult<Sport>;
 
