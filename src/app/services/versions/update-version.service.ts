@@ -27,12 +27,16 @@ export class UpdateService {
       return;
     }
 
+    console.log("Vérification des mises à jour OTA...");
+
     try {
       const response: Response = await fetch(environment.githubApiUrl);
       if (!response.ok) {
         console.warn('Impossible de lire la release OTA.', response.status);
         return;
       }
+
+      console.log(environment);
 
       const latestRelease = await response.json();
       if (!latestRelease?.tag_name || !Array.isArray(latestRelease.assets)) {
@@ -70,7 +74,6 @@ export class UpdateService {
         });
         await CapacitorUpdater.set(update);
         localStorage.removeItem(this.lastFailedVersionKey);
-        // Do not force reload now; app continues on embedded bundle and update applies safely.
         console.info('Mise à jour OTA prête, redémarrer l\'application pour l\'appliquer.');
       }
     } catch (e) {

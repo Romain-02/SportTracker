@@ -1,7 +1,7 @@
 import {DOCUMENT, isPlatformBrowser} from '@angular/common';
 import {inject, Injectable, PLATFORM_ID, signal} from '@angular/core';
 import {Capacitor} from "@capacitor/core";
-import {Style, StatusBar} from "@capacitor/status-bar";
+import {StatusBar, Style} from "@capacitor/status-bar";
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
