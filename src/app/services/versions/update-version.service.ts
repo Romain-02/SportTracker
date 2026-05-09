@@ -11,76 +11,99 @@ import {environment} from "../../../environments/environment";
 export class UpdateService {
 
   private readonly lastFailedVersionKey = 'ota_last_failed_version';
+  private readonly appliedVersionKey = 'ota_last_applied_version';
+  private checkRunning = false; // concurrency guard
 
   constructor() { }
 
   async checkForUpdates() {
-    let attemptedVersion: string = '';
-
     if (!Capacitor.isNativePlatform()) {
       return;
     }
 
-    const status: ConnectionStatus = await Network.getStatus();
-    if (!status.connected) {
-      console.log("Hors connexion, utilisation de la version actuelle.");
+    if (this.checkRunning) {
+      console.debug('OTA check already running, skipping.');
       return;
     }
+    this.checkRunning = true;
 
-    console.log("Vérification des mises à jour OTA...");
+    let attemptedVersion: string = '';
 
     try {
-      const response: Response = await fetch(environment.githubApiUrl);
-      if (!response.ok) {
-        console.warn('Impossible de lire la release OTA.', response.status);
+      const status: ConnectionStatus = await Network.getStatus();
+      if (!status.connected) {
+        console.log("Hors connexion, utilisation de la version actuelle.");
         return;
       }
 
-      console.log(environment);
+      console.log("Vérification des mises à jour OTA...");
 
-      const latestRelease = await response.json();
-      if (!latestRelease?.tag_name || !Array.isArray(latestRelease.assets)) {
-        console.warn('Release OTA invalide: tag ou assets manquants.');
-        return;
-      }
+      try {
+        const response: Response = await fetch(environment.githubApiUrl);
+        if (!response.ok) {
+          console.warn('Impossible de lire la release OTA.', response.status);
+          return;
+        }
 
-      const latestVersion = this.normalizeVersion(latestRelease.tag_name);
-      attemptedVersion = latestVersion;
-      const currentVersion: string = this.normalizeVersion((await App.getInfo()).version);
+        console.log(environment);
 
-      if (!latestVersion || latestVersion === currentVersion) {
-        return;
-      }
+        const latestRelease = await response.json();
+        if (!latestRelease?.tag_name || !Array.isArray(latestRelease.assets)) {
+          console.warn('Release OTA invalide: tag ou assets manquants.');
+          return;
+        }
 
-      if (latestVersion === localStorage.getItem(this.lastFailedVersionKey)) {
-        console.warn('Version OTA déjà en échec, tentative ignorée:', latestVersion);
-        return;
-      }
+        const latestVersion = this.normalizeVersion(latestRelease.tag_name);
+        attemptedVersion = latestVersion;
 
-      const bundleAsset = latestRelease.assets.find((asset: { name?: string; browser_download_url?: string }) => {
-        return !!asset?.browser_download_url && !!asset?.name && asset.name.toLowerCase().endsWith('.zip');
-      });
+        const appliedVersion = localStorage.getItem(this.appliedVersionKey);
+        if (appliedVersion && appliedVersion === latestVersion) {
+          console.info('Version OTA déjà appliquée, aucune action nécessaire:', latestVersion);
+          return;
+        }
 
-      if (!bundleAsset?.browser_download_url) {
-        console.warn('Aucun asset .zip trouvé pour OTA.');
-        return;
-      }
+        const currentVersion: string = this.normalizeVersion((await App.getInfo()).version);
 
-      // Compare avec la version actuelle de l’appli
-      if (latestVersion !== currentVersion) {
-        const update: BundleInfo = await CapacitorUpdater.download({
-          url: bundleAsset.browser_download_url,
-          version: latestVersion,
+        if (!latestVersion || latestVersion === currentVersion) {
+          return;
+        }
+
+        if (latestVersion === localStorage.getItem(this.lastFailedVersionKey)) {
+          console.warn('Version OTA déjà en échec, tentative ignorée:', latestVersion);
+          return;
+        }
+
+        const bundleAsset = latestRelease.assets.find((asset: { name?: string; browser_download_url?: string }) => {
+          return !!asset?.browser_download_url && !!asset?.name && asset.name.toLowerCase().endsWith('.zip');
         });
-        await CapacitorUpdater.set(update);
-        localStorage.removeItem(this.lastFailedVersionKey);
-        console.info('Mise à jour OTA prête, redémarrer l\'application pour l\'appliquer.');
+
+        if (!bundleAsset?.browser_download_url) {
+          console.warn('Aucun asset .zip trouvé pour OTA.');
+          return;
+        }
+
+        // Compare avec la version actuelle de l’appli
+        if (latestVersion !== currentVersion) {
+          const update: BundleInfo = await CapacitorUpdater.download({
+            url: bundleAsset.browser_download_url,
+            version: latestVersion,
+          });
+
+          await CapacitorUpdater.set(update);
+
+          localStorage.setItem(this.appliedVersionKey, latestVersion);
+
+          localStorage.removeItem(this.lastFailedVersionKey);
+          console.info('Mise à jour OTA prête, redémarrer l\'application pour l\'appliquer.');
+        }
+      } catch (e) {
+        if (attemptedVersion) {
+          localStorage.setItem(this.lastFailedVersionKey, attemptedVersion);
+        }
+        console.error("Erreur de mise à jour :", e);
       }
-    } catch (e) {
-      if (attemptedVersion) {
-        localStorage.setItem(this.lastFailedVersionKey, attemptedVersion);
-      }
-      console.error("Erreur de mise à jour :", e);
+    } finally {
+      this.checkRunning = false;
     }
   }
 
